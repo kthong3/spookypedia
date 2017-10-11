@@ -13,4 +13,25 @@ end
   spooky_user.save
 end
 
+Category.create!(name: 'How-To')
+Category.create!(name: 'Costume Inspiration')
+Category.create!(name: 'Spooky Stories')
+Category.create!(name: 'Costume Help!')
+Category.create!(name: 'Favorite Halloween Candy')
+Category.create!(name: 'Scary Events')
 
+authors = User.pluck(:id)
+categories = Category.pluck(:id)
+20.times do
+  article = Article.new(title: Faker::Lovecraft.tome, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample)
+  article.save
+
+  article = Article.new(title: Faker::Lovecraft.location, body: Faker::Lovecraft.paragraph(rand(20..40)), author_id: authors.sample, category_id: categories.sample)
+  article.save
+
+  article = Article.new(title: Faker::StarTrek.villain, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample)
+  article.save
+
+  article = Article.new(title: Faker::Zelda.location, body: Faker::Lovecraft.paragraph(rand(10..40)), author_id: authors.sample, category_id: categories.sample)
+  article.save
+end
