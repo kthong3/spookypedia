@@ -6,6 +6,13 @@ class UsersController < ApplicationController
   end
 
   def create
+    user = User.new(post_params)
+    if user.save
+      redirect_to new_session_url
+    else
+      @errors = user.errors.full_messages
+      render "users/new"
+    end
   end
 
   def show
@@ -16,5 +23,11 @@ class UsersController < ApplicationController
   end
 
   def update
+  end
+
+  private
+
+  def post_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 end
