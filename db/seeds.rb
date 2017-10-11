@@ -1,8 +1,13 @@
 require 'faker'
 
+User.delete_all
+Category.delete_all
+Article.delete_all
+Comment.delete_all
+
 admin = [1,1,1,2,2,2]
 2.times do
-  admin_user = User.new(username: "Admin #{admin.shift}", password: "password", email: "admin#{admin.shift}@admin.none", is_admin: true, profile_pic_url = Faker::Avatar.image("#{admin.shift}", "300x300", "png", "set4", "bg1"))
+  admin_user = User.new(username: "Admin #{admin.shift}", password: "password", email: "admin#{admin.shift}@admin.none", is_admin: true, profile_pic_url: Faker::Avatar.image("#{admin.shift}", "300x300", "png", "set4", "bg1"))
   admin_user.save
 end
 
@@ -42,4 +47,8 @@ categories = Category.pluck(:id)
 
   article = Article.new(title: Faker::Zelda.location, body: Faker::Lovecraft.paragraph(rand(10..40)), author_id: authors.sample, category_id: categories.sample)
   article.save
+end
+
+20.times do
+  Comment.create!(article_id: Article.pluck(:id).sample, author_id: User.pluck(:id).sample, body: Faker::Lovecraft.tome)
 end
