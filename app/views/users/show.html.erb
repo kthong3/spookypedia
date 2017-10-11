@@ -1,0 +1,24 @@
+<h1><%= @user.username %></h1>
+
+<p>PLACEHOLDER FOR PROFILE PICTURE</p>
+<p>PLACEHOLDER FOR USER BIO</p>
+<p>PLACEHOLDER FOR NEW ARTICLE BUTTON</p>
+<p>PLACEHOLDER FOR SAVED DRAFTS FUNCTIONALITY</p>
+
+<h3>Authored Articles</h3>
+
+<ul>
+<% @user.articles.each do |article| %>
+  <li class="authored_article"><%= link_to article.title, article_path(article)%>
+  </li>
+<% end %>
+</ul>
+
+<h3>Authored Comments</h3>
+
+<ul>
+<% @user.comments.each do |comment| %>
+  <li class="authored_comment"><%= link_to comment.body, article_path(comment.article)%>
+  </li>
+<% end %>
+</ul>
