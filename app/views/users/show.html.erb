@@ -7,18 +7,18 @@
 
 <h3>Authored Articles</h3>
 
-<ul>
+<ul class="authored_articles">
 <% @user.articles.each do |article| %>
-  <li class="authored_article"><%= link_to article.title, article_path(article)%>
+  <li><%= link_to article.title, article_path(article)%>
   </li>
 <% end %>
 </ul>
 
 <h3>Authored Comments</h3>
 
-<ul>
+<ul class="authored_comments">
 <% @user.comments.each do |comment| %>
-  <li class="authored_comment"><%= link_to comment.body, article_path(comment.article)%>
+  <li><%= link_to comment.body, article_path(comment.article)%>
   </li>
 <% end %>
 </ul>
