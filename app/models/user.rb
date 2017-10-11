@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  # validates :password, { presence: true, length: { miniumum: 6 } }
 
   def init
     self.is_admin ||= false
