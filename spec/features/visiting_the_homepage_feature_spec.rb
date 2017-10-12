@@ -10,7 +10,6 @@ feature "visiting the homepage" do
     visit '/'
 
     within("#category-list-container") do
-      p page
       expect(page).to have_content category1.name
       click_link("#{category1.name}")
     end
