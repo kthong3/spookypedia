@@ -7,7 +7,7 @@
 <p>PLACEHOLDER FOR NEW ARTICLE BUTTON</p>
 
 <% if logged_in? %>
-  <%= link_to "Create a New Article!", new_article_path%>
+  <%= link_to "Create a New Article!", new_article_path(:cat_id => Category.first.id) %>
 <% end %>
 <p>PLACEHOLDER FOR SAVED DRAFTS FUNCTIONALITY</p>
 
