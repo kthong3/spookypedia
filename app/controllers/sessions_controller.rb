@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to "/categories"
     else
-      @user = User.new(email: params[:email])
+      @user = User.new(email: params[:user][:email])
       @error = true
       render "/sessions/new"
     end
