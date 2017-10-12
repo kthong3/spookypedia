@@ -1,5 +1,7 @@
 <h2><%= @article.title %></h2>
 
+<p id="notice"><b><%= notice %></b></p>
+
 <div class="article-info">
   <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
   <p><%= @article.body %></p>
@@ -17,7 +19,7 @@
   <% end %>
 </div><br>
 
-<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <% if logged_in? %>
   <%= form_for :comment, url: article_comments_path(@article) do |comment| %>

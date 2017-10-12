@@ -10,16 +10,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    p "******************"
-    p "Category is: #{post_params[:category_id]}"
-    p "Title is: #{post_params[:title]}"
-    p "Body is: #{post_params[:body]}"
-    p "Publish? is: #{post_params[:is_published]}"
-
     article = Article.new(post_params)
     article.author_id = current_user.id
     if article.save
-      redirect_to article_url(article)
+      if article.is_published
+        redirect_to article_url(article), notice: "Article successfully created and published!"
+      else
+        redirect_to user_url(current_user), notice: "Article successfully created and saved as a draft!"
+      end
     else
       @errors = article.errors.full_messages
       category_array = []
@@ -27,11 +25,11 @@ class ArticlesController < ApplicationController
       @category = category_array
       render "articles/new"
     end
-
   end
 
   def show
     @article = find_and_ensure_article(params[:id])
+    p flash
   end
 
   def edit
@@ -54,4 +52,3 @@ class ArticlesController < ApplicationController
   end
 
 end
-
