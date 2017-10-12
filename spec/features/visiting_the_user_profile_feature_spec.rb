@@ -14,7 +14,7 @@ feature 'user profile page' do
     visit "/users/#{user.id}"
 
     expect(page).to have_current_path user_path(user)
-    expect(page.first("h1").text).to eq user.username
+    expect(page.all("h1")[1].text).to eq user.username
 
     expect(page.first("h3").text).to eq "Authored Articles"
     articles_list = find('.authored_articles').all('li')
