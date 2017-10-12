@@ -2,9 +2,6 @@ require 'rails_helper'
 
 feature "visiting the homepage" do
 
-  # background do
-  # end
-
   scenario "the user sees a list of the categories, and can visit them" do
     category1 = Category.create(name: "Halloween Stuff")
     # category2 = Category.create(name: "Spooky")
@@ -44,5 +41,11 @@ feature "visiting the homepage" do
 
     expect(page).to have_current_path category_path(category1)
   end
+
+  scenario "the user can log into their account"
+
+  scenario "the user can log out of their account"
+
+  scenario "the user can register"
 
 end
