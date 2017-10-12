@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     resources :comments, except: [:index]
   end
 
+  root 'categories#index'
 end
