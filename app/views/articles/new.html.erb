@@ -8,23 +8,23 @@
 </ul>
 <% end %>
 
-<%= form_for :article, url: articles_path do |form| %>
+<%= form_for :article, url: articles_path do |article| %>
 
-  <%= form.select :category_id, options_for_select(@category) %>
+  <%= article.select :category_id, options_for_select(@category) %>
 
   <p>
-    <%= form.label :title %></br>
-    <%= form.text_field :title %>
+    <%= article.label :title %></br>
+    <%= article.text_field :title %>
   </p>
 
   <p>
-    <%= form.label :body %></br>
-    <%= form.text_area :body, :cols => "100", :rows => "10" %>
+    <%= article.label :body %></br>
+    <%= article.text_area :body, :cols => "100", :rows => "10" %>
   </p>
 
-  <%= form.check_box :is_published, {}, true, false %><b> Publish this article!</b>
+  <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
 
   <p>
-    <%= form.submit value="Submit" %>
+    <%= article.submit value="Submit" %>
   </p>
 <% end %>

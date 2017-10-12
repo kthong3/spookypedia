@@ -20,8 +20,8 @@ feature 'comment on article' do
     find("input[type='submit']").click
 
     expect(page).to have_current_path article_path(article)
-    expect(page.should have_css("#notice"))
-    expect(page.first("#notice").text).to eq "Comment cannot be blank!"
+    expect(page.should have_css(".alert"))
+    expect(page.first(".alert").text).to eq "Comment cannot be blank!"
   end
 
   scenario 'the user is logged in and leaves a valid comment' do
