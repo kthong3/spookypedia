@@ -8,8 +8,16 @@ class Article < ApplicationRecord
 
   after_initialize :init
 
+  before_update :log_revision
+
   def init
     self.is_flagged ||= false
     self.is_published ||= false
   end
+
+  private
+
+
+
+
 end
