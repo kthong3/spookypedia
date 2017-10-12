@@ -1,0 +1,15 @@
+<tr class="revision-table-headers">
+  <th><%= revision.revised_attribute.capitalize %></th>
+  <th>Previous Version</th>
+  <th>Current Version</th>
+</tr>
+<tr>
+  <th class="revision-table-datetime"><%= revision.created_at.strftime('%D, %R(%Z)') %></td>
+  <td class="revision-table-values"><%= revision.before_value %></td>
+  <td class="revision-table-values"><%= revision.revised_value %></td>
+ <td class="revision-table-button">
+    <%= form_for revision.object do |f| %>
+      <%= f.submit %>
+    <% end %>
+  </td>
+</tr>

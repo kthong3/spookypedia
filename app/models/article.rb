@@ -38,7 +38,7 @@ class Article < ApplicationRecord
 
   def log_revision
     self.changes.each do |revised_attribute, values|
-      if revised_attribute != "updated_at"
+      if revised_attribute == "body" || revised_attribute == "title"
         before_value = values[0]
         revised_value = values[1]
         editor_id = editor.id
