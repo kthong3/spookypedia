@@ -6,7 +6,7 @@
 
 <div class="article-info">
   <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
-  <p><%= @article.body %></p>
+  <p><%= @article.body.html_safe %></p>
   <span>PLACEHOLDER FOR FLAG</span>
 </div>
 
