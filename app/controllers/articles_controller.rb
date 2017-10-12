@@ -4,9 +4,9 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @categories = Category.all
-    p "Categories array is: #{@categories}"
-    p "******************"
+    category_name_array = []
+    Category.all.each { |category| category_name_array << category.name }
+    @categories = category_name_array
   end
 
   def create

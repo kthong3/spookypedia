@@ -10,12 +10,6 @@
 
 <%= form_for :article, url: articles_path do |form| %>
 
-  <select name="new_article_category" id="new_article_category">
-    <% @categories.each do |category| %>
-      <option value=<%= category.name %>><%= category.name %></option>
-    <% end %>
-  <select>
-
   <%= form.select :test_category, options_for_select(@categories) %>
 
   <p>
@@ -25,7 +19,7 @@
 
   <p>
     <%= form.label :body %></br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, :cols => "100", :rows => "10" %>
   </p>
 
   <p>
