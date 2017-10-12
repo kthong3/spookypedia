@@ -10,7 +10,7 @@
 
 <%= form_for :article, url: articles_path do |form| %>
 
-  <%= form.select :test_category, options_for_select(@categories) %>
+  <%= form.select :new_article_category, options_for_select(@categories) %>
 
   <p>
     <%= form.label :title %></br>
@@ -21,6 +21,8 @@
     <%= form.label :body %></br>
     <%= form.text_area :body, :cols => "100", :rows => "10" %>
   </p>
+
+  <%= form.check_box :is_published, {}, true, false %><b> Publish this article!</b>
 
   <p>
     <%= form.submit value="Submit" %>

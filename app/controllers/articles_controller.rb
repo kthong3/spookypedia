@@ -11,9 +11,13 @@ class ArticlesController < ApplicationController
 
   def create
     p "******************"
-    p "Category is: #{post_params[:test_category]}"
+    p "Category is: #{post_params[:new_article_category]}"
     p "Title is: #{post_params[:title]}"
     p "Body is: #{post_params[:body]}"
+    p "Publish? is: #{post_params[:is_published]}"
+
+
+
 
   end
 
@@ -37,7 +41,7 @@ class ArticlesController < ApplicationController
   end
 
   def post_params
-    params.require(:article).permit(:new_article_category, :test_category, :title, :body)
+    params.require(:article).permit(:new_article_category, :title, :body, :is_published)
   end
 
 end
