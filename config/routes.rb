@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :users, except: [:destroy] do
     resources :admins, only: [:index, :new, :create, :destroy]
   end
