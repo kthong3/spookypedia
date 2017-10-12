@@ -10,9 +10,15 @@
   <header>
     <!-- Halloween countdown here -->
     <h1>Spookypedia!</h1>
-    <!-- logged_in/logged_out link partials here -->
   </header>
   <body>
+    <nav>
+      <% if !logged_in? %>
+      <%= link_to "Registration", new_user_path %> | <%= link_to "Login", new_session_path %> | <%= link_to "Home", categories_path %>
+      <% else %>
+      <%= link_to current_user.username, user_path(current_user.id) %> |<form class="logout_form" action="/sessions" method="post"><input type="hidden" name="_method" value="delete"><input class="submitLink" type="submit" value="Logout"></form>| <%= link_to "Home", categories_path %>
+      <% end %>
+    </nav>
     <%= yield %>
   </body>
 </html>
