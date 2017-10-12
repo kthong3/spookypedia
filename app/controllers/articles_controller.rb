@@ -46,13 +46,25 @@ class ArticlesController < ApplicationController
 
   def update
     @article = find_and_ensure_article(params[:id])
-    @article.update(post_params)
+
     p "****************"
-    p "EDIT!!!!!"
-    p "Category ID: #{post_params[:category_id]}"
     p "Publish status: #{post_params[:is_published]}"
     p "****************"
-    redirect_to article_url(@article), notice: "Article successfully edited!"
+
+    if @article.update(post_params)
+      redirect_to article_url(@article), notice: "Article successfully edited!"
+    else
+      @errors = @article.errors.full_messages
+
+      @article = find_and_ensure_article(params[:id])
+
+      authorize!(@article.author)
+
+      category_array = []
+      Category.all.each { |category| category_array << [category.name, category.id] }
+      @category = category_array
+      render "articles/edit"
+    end
   end
 
   def destroy
