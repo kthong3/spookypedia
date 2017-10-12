@@ -64,6 +64,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article = find_and_ensure_article(params[:id])
+    Article.destroy(@article.id)
+    redirect_to "/categories", alert: "Article deleted!!!"
   end
 
   def find_and_ensure_article(id)
