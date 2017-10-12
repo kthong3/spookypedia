@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
     p "Publish? is: #{post_params[:is_published]}"
 
     article = Article.new(post_params)
+    article.author_id = current_user.id
     if article.save
       redirect_to article_url(article)
     else
