@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       if Article.find_by(id: params[:article_id]).nil? || Article.find_by(id: params[:article_id]).is_published == false
         render :file => "#{Rails.root}/public/404.html", :status => 404
       else
-        redirect_to article_url(params[:article_id]), notice: "Comment cannot be blank!"
+        redirect_to article_url(params[:article_id]), alert: "Comment cannot be blank!"
       end
     end
   end

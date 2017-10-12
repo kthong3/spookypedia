@@ -1,5 +1,7 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
 
+<p class="notice"><b><%= notice %></b></p>
+
 <h2><%= @article.title %></h2>
 
 <div class="article-info">
@@ -19,7 +21,7 @@
   <% end %>
 </div><br>
 
-<p id="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <% if logged_in? %>
   <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>

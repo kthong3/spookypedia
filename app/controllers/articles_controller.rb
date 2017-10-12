@@ -4,9 +4,27 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    category_array = []
+    Category.all.each { |category| category_array << [category.name, category.id] }
+    @category = category_array
   end
 
   def create
+    article = Article.new(post_params)
+    article.author_id = current_user.id
+    if article.save
+      if article.is_published
+        redirect_to article_url(article), notice: "Article successfully created and published!"
+      else
+        redirect_to user_url(current_user), notice: "Article successfully created and saved as a draft!"
+      end
+    else
+      @errors = article.errors.full_messages
+      category_array = []
+      Category.all.each { |category| category_array << [category.name, category.id] }
+      @category = category_array
+      render "articles/new"
+    end
   end
 
   def show
@@ -28,5 +46,8 @@ class ArticlesController < ApplicationController
     article
   end
 
-end
+  def post_params
+    params.require(:article).permit(:category_id, :title, :body, :is_published)
+  end
 
+end
