@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = find_and_ensure_article(params[:id])
-    p flash
   end
 
   def edit
