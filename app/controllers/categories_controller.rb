@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @articles = Article.all
   end
 
   def new
@@ -14,6 +13,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @articles = Article.where(category_id: @category.id)
+    @featured = @articles.sample
   end
 
   def edit

@@ -25,16 +25,17 @@ feature "visiting a category page" do
 		author1 = User.create(username: "TestUser", is_admin: "false", email: "test@test.none", password: "password")
 		author2 = User.create(username: "AlsoTestUser", is_admin: "false", email: "secondtest@test.none", password: "password")
 		art1 = category1.articles.create(title: "This is a Halloween post", body: "STuff and things and whatnot.", author_id: author1.id)
+		art2 = category1.articles.create(title: "What a cool costume", body: "It's so scary look at it", author_id: author2.id)
 
 		visit "/categories/#{category1.id}"
 
-		within("featured-article") do
+		within(".featured-article") do
       expect(page).to have_content art1.title
       expect(page).to have_content art1.body
+
     end
 
+    expect(page).to have_current_path category_path(category1)
 	end
-
-
 
 end

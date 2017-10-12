@@ -1,15 +1,18 @@
-<div class="article-box">
-	<span><h3><%= @category.name %></h3></span>	
-	<ul>
-		<% @articles.each do |article| %>
-			<li><%= link_to article.title, article %></li>
-  	<% end %>
-	</ul> 
-</div>	
+<div class="category-container">
+	<div class="article-box">
+		<span><h3><%= @category.name %></h3></span>	
+		<ul>
+			<% @articles.each do |article| %>
+				<li><%= link_to article.title, article %></li>
+	  	<% end %>
+		</ul> 
+	</div>		
 
-<div class="featured-article">
-	<span>
-		<h3><%= @articles.first.title %></h3>
-	</span>
-	<div class="article-content"><%= @articles.first.body%></div>
+	<div class="featured-article">
+		<span>
+			<h3><%= @featured.title %></h3>
+		</span>
+		<span><%= link_to @featured.title, article_path(@featured) %></span>
+		<div class="article-content"><%= @featured.body%></div>
+	</div>
 </div>
