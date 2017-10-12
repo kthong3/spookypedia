@@ -35,9 +35,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = find_and_ensure_article(params[:id])
+    authenticate!
 
-    authorize!(@article.author)
+    @article = find_and_ensure_article(params[:id])
 
     category_array = []
     Category.all.each { |category| category_array << [category.name, category.id] }
@@ -45,6 +45,8 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    authenticate!
+
     @article = find_and_ensure_article(params[:id])
 
     p "****************"
@@ -57,8 +59,6 @@ class ArticlesController < ApplicationController
       @errors = @article.errors.full_messages
 
       @article = find_and_ensure_article(params[:id])
-
-      authorize!(@article.author)
 
       category_array = []
       Category.all.each { |category| category_array << [category.name, category.id] }

@@ -1,4 +1,4 @@
-<% if authorized?(@article.author) %>
+<% if logged_in? %>
 
 <h1>Edit your article!</h2>
 
@@ -23,9 +23,6 @@
     <%= article.label :body %></br>
     <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
   </p>
-
-  <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
-
 
   <p>
     <%= article.submit value="Submit" %>
