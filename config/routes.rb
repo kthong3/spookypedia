@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :categories
   resources :articles do
-    resources :comments, except: [:index]
+    resources :comments, except: [:new, :index]
   end
 
   root 'categories#index'
