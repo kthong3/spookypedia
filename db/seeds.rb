@@ -36,16 +36,16 @@ Category.create!(name: 'Kreepy Kids')
 authors = User.pluck(:id)
 categories = Category.pluck(:id)
 20.times do
-  article = Article.new(title: Faker::Lovecraft.tome, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample)
+  article = Article.new(title: Faker::Lovecraft.tome, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample, is_published: true)
   article.save
 
-  article = Article.new(title: Faker::Lovecraft.location, body: Faker::Lovecraft.paragraph(rand(20..40)), author_id: authors.sample, category_id: categories.sample)
+  article = Article.new(title: Faker::Lovecraft.location, body: Faker::Lovecraft.paragraph(rand(20..40)), author_id: authors.sample, category_id: categories.sample, is_published: true)
   article.save
 
-  article = Article.new(title: Faker::StarTrek.villain, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample)
+  article = Article.new(title: Faker::StarTrek.villain, body: Faker::Lovecraft.paragraph(rand(10..20)), author_id: authors.sample, category_id: categories.sample, is_published: true)
   article.save
 
-  article = Article.new(title: Faker::Zelda.location, body: Faker::Lovecraft.paragraph(rand(10..40)), author_id: authors.sample, category_id: categories.sample)
+  article = Article.new(title: Faker::Zelda.location, body: Faker::Lovecraft.paragraph(rand(10..40)), author_id: authors.sample, category_id: categories.sample, is_published: true)
   article.save
 end
 
