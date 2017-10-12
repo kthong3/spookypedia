@@ -49,10 +49,6 @@ class ArticlesController < ApplicationController
 
     @article = find_and_ensure_article(params[:id])
 
-    p "****************"
-    p "Publish status: #{post_params[:is_published]}"
-    p "****************"
-
     if @article.update(post_params)
       redirect_to article_url(@article), notice: "Article successfully edited!"
     else
