@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @editor = current_user
   end
 
   def destroy
