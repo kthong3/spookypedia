@@ -10,29 +10,33 @@
 <% end %>
 
 <% if logged_in? && authorized?(@user) %>
-<h3>Unfinished Works</h3>
-<ul class="unpublished_articles">
+<div class="unpublished-articles">
+  <h3>Unfinished Works</h3>
+  <ul class="unpublished_articles">
   <% @user.unpublished_articles.each do |article| %>
-  <li><%= link_to article.title, article_path(article)%>
-  </li>
+    <li><%= link_to article.title, article_path(article)%>
+    </li>
   <% end %>
-</ul>
+  </ul>
+</div>
 <% end %>
 
-<h3>Authored Articles</h3>
+<div class="published-articles">
+  <h3>Authored Articles</h3>
+  <ul class="authored_articles">
+  <% @user.published_articles.each do |article| %>
+    <li><%= link_to article.title, article_path(article)%>
+    </li>
+  <% end %>
+  </ul>
+</div>
 
-<ul class="authored_articles">
-<% @user.published_articles.each do |article| %>
-  <li><%= link_to article.title, article_path(article)%>
-  </li>
-<% end %>
-</ul>
-
-<h3>Authored Comments</h3>
-
-<ul class="authored_comments">
-<% @user.comments.each do |comment| %>
-  <li><%= link_to comment.body.html_safe, article_path(comment.article)%>
-  </li>
-<% end %>
-</ul>
+<div class="authored-comments">
+  <h3>Authored Comments</h3>
+  <ul class="authored_comments">
+  <% @user.comments.each do |comment| %>
+    <li><%= link_to comment.body.html_safe, article_path(comment.article)%>
+    </li>
+  <% end %>
+  </ul>
+</div>
