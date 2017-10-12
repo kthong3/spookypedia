@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(post_params)
     if user.save
-      redirect_to new_session_url
+      session[:user_id] = user.id
+      redirect_to categories_url
     else
       @errors = user.errors.full_messages
       render "users/new"
@@ -30,4 +31,7 @@ class UsersController < ApplicationController
   def post_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
+
 end
+
+

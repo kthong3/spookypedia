@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
   helper_method :authorized?
   helper_method :current_user
 
-  def find_and_ensure_article(id)
-    article = Article.find_by(id: id)
-    render :file => "#{Rails.root}/public/404.html", :status => 404 unless article
-    entry
-  end
-
   def logged_in?
     !session[:user_id].nil?
   end
