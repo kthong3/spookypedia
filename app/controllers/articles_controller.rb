@@ -37,6 +37,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
 
+    # This line is imperative for article version history creation.
     @article.editor = current_user
   end
 
