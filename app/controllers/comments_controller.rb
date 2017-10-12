@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   def create
-    p params
     comment = Comment.new(comment_params)
     comment.article_id = params[:article_id]
     comment.author_id = current_user.id
