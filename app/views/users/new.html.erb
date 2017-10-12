@@ -1,0 +1,33 @@
+<h1>Register</h1>
+
+<% if @errors %>
+<ul class='errors'>
+  <% @errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for :user, url: users_path do |user| %>
+  <p>
+    <%= user.label :username %></br>
+    <%= user.text_field :username %>
+  </p>
+
+  <p>
+    <%= user.label :email %></br>
+    <%= user.text_field :email %>
+  </p>
+  <p>
+    <%= user.label :password %></br>
+    <%= user.password_field :password %>
+  </p>
+  <p>
+    <%= user.label :password_confirmation, "Confirm Password" %></br>
+    <%= user.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= user.submit value="Register" %>
+  </p>
+<% end %>
