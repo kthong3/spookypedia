@@ -40,10 +40,4 @@ feature "visiting the homepage" do
     expect(page).to have_current_path category_path(category1)
   end
 
-  scenario "the user can log into their account"
-
-  scenario "the user can log out of their account"
-
-  scenario "the user can register"
-
 end

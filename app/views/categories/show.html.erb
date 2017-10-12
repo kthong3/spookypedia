@@ -1,1 +1,12 @@
-<%= @category.name %>
+<div class="article-box">
+	<span><%= @category.name %></span>	
+	<ul>
+		<% @category.articles.each do |article| %>
+		<li><%= link_to article.title, article %></li>
+	</ul> 
+  <% end %>
+</div>	
+
+<div class="featured-article">
+	FEATURED ARTICLE HERE
+</div>
