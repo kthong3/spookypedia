@@ -17,7 +17,13 @@ class Article < ApplicationRecord
 
   private
 
+  def log_revision
 
+  end
+
+  def rollback
+
+  end
 
 
 end

@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   resources :categories
   resources :articles do
     resources :comments, except: [:new, :index]
+    resources :revisions, only: [:create, :index]
   end
 
   root 'categories#index'
 
   get '/sessions' => 'sessions#new', as: :new_session
   delete "/sessions" => 'sessions#destroy', as: :logout
+
 end
