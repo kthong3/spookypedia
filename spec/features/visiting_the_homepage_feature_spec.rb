@@ -4,13 +4,11 @@ feature "visiting the homepage" do
 
   scenario "the user sees a list of the categories, and can visit them" do
     category1 = Category.create(name: "Halloween Stuff")
-    # category2 = Category.create(name: "Spooky")
 
     visit '/'
 
     within("#category-list-container") do
       expect(page).to have_content category1.name
-      # expect(page).to have_content category2.name
       click_link("#{category1.name}")
     end
 
