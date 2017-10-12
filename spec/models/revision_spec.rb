@@ -3,11 +3,14 @@ require 'rails_helper'
 describe Revision do
   let(:user) { User.create!(username: "Test User", email: "test@test", password: "password") }
   let(:editor) { User.create!(username: "Editing User", email: "edit@test", password: "password") }
-  let(:current_user) { session[:user_id] = editor.id }
   let(:category) { Category.create!(name: "Spooky") }
   let(:article) { Article.create!(title: "How I Did It", body: "The story of Young Frankenstein", author_id: user.id, category_id: category.id) }
 
   describe "revision object's attributes" do
+    before(:each) do
+      article.editor = editor
+    end
+
     it "stores the name of the attribute changed (e.g. 'body')" do
       article.update_attributes(body: "Edited article body")
       revision = Revision.last

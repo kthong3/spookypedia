@@ -17,7 +17,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @editor = current_user
+    @article = Article.find(params[:id])
+
+    @article.editor = current_user
   end
 
   def destroy
