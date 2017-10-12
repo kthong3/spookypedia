@@ -17,10 +17,12 @@
   <% end %>
 </div><br>
 
-<%= form_for :comment, url: article_comments_path(:article_id) do |comment| %>
-  <span>
-    <%= comment.label "Write a new comment!" %><br>
-    <%= comment.text_area :body, :cols => "100", :rows => "10" %>
-  </span><br>
-    <%= comment.submit value="Comment!" %>
+<p id="notice"><%= notice %></p>
+
+<% if logged_in? %>
+  <%= form_for :comment, url: article_comments_path(@article) do |comment| %>
+      <p>Write a new comment!</p>
+      <%= comment.text_area :body, :cols => "100", :rows => "10" %><br>
+      <%= comment.submit value="Comment!" %>
+  <% end %>
 <% end %>
