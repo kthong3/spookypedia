@@ -1,1 +1,21 @@
-"plz work"
+<h1>Login</h1>
+
+<% if @error %>
+<span>Your email and password don't match!</span>
+<% end %>
+
+<%= form_for :user, url: sessions_path do |user| %>
+  <p>
+    <%= user.label :email %></br>
+    <%= user.text_field :email %>
+  </p>
+
+  <p>
+    <%= user.label :password %></br>
+    <%= user.password_field :password %>
+  </p>
+
+  <p>
+    <%= user.submit value="Login" %>
+  </p>
+<% end %>
