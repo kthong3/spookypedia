@@ -13,4 +13,12 @@ class User < ApplicationRecord
     self.is_admin ||= false
     self.is_banned ||= false
   end
+
+  def published_articles
+    self.articles.select { |article| article.is_published == true }
+  end
+
+  def unpublished_articles
+    self.articles.select { |article| article.is_published == false }
+  end
 end
