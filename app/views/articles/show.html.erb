@@ -1,3 +1,5 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+
 <h2><%= @article.title %></h2>
 
 <div class="article-info">
@@ -10,7 +12,7 @@
 <div class="article-comments">
   <% @article.comments.each do |comment| %>
   <div class="comment">
-    <p><%= comment.body %><br>
+    <p><%= comment.body.html_safe %><br>
     Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %>.</p>
   </div>
   <span>PLACEHOLDER FOR FLAG</span>
@@ -20,9 +22,9 @@
 <p id="notice"><%= notice %></p>
 
 <% if logged_in? %>
-  <%= form_for :comment, url: article_comments_path(@article) do |comment| %>
+  <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
       <p>Write a new comment!</p>
-      <%= comment.text_area :body, :cols => "100", :rows => "10" %><br>
+      <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
       <%= comment.submit value="Comment!" %>
   <% end %>
 <% end %>
