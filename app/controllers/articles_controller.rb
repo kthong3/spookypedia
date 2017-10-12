@@ -4,20 +4,28 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    category_name_array = []
-    Category.all.each { |category| category_name_array << category.name }
-    @categories = category_name_array
+    category_array = []
+    Category.all.each { |category| category_array << [category.name, category.id] }
+    @category = category_array
   end
 
   def create
     p "******************"
-    p "Category is: #{post_params[:new_article_category]}"
+    p "Category is: #{post_params[:category_id]}"
     p "Title is: #{post_params[:title]}"
     p "Body is: #{post_params[:body]}"
     p "Publish? is: #{post_params[:is_published]}"
 
-
-
+    article = Article.new(post_params)
+    if article.save
+      redirect_to article_url(article)
+    else
+      @errors = article.errors.full_messages
+      category_array = []
+      Category.all.each { |category| category_array << [category.name, category.id] }
+      @category = category_array
+      render "articles/new"
+    end
 
   end
 
@@ -41,7 +49,7 @@ class ArticlesController < ApplicationController
   end
 
   def post_params
-    params.require(:article).permit(:new_article_category, :title, :body, :is_published)
+    params.require(:article).permit(:category_id, :title, :body, :is_published)
   end
 
 end
