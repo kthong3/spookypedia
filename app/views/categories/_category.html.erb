@@ -1,5 +1,5 @@
 <div class="category-box">
-  <%= link_to category.name, category %><br>
+  <h2><%= link_to category.name, category %></h3><br>
   <% category.articles.each do  |article| %>
       <%= article.title%>
       <span class="category-article-preview">Article stats go here.
