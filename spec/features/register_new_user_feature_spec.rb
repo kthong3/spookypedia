@@ -21,7 +21,7 @@ feature 'registration page' do
     fill_in('user[password_confirmation]', :with => "redpanda")
     find("input[type='submit']").click
 
-    expect(page).to have_current_path new_session_path
+    expect(page).to have_current_path categories_path
   end
 
   scenario 'the user properly registers' do
