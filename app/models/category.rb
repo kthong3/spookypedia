@@ -4,8 +4,7 @@ class Category < ApplicationRecord
   has_many :comments, through: :articles
 
   def top_articles
-    self.articles.where
-    articles.comments.count
+    self.articles.select { |article| (article.comments.count > 2) }
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
