@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def new
     authenticate!
+    @default_category_id = params[:cat_id]
     category_array = []
     Category.all.each { |category| category_array << [category.name, category.id] }
     @category = category_array
@@ -34,13 +35,34 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    authenticate!
+
+    @article = find_and_ensure_article(params[:id])
+
+    category_array = []
+    Category.all.each { |category| category_array << [category.name, category.id] }
+    @category = category_array
   end
 
   def update
-    @article = Article.find(params[:id])
+    authenticate!
 
-    # This line is imperative for article version history creation.
+    @article = find_and_ensure_article(params[:id])
     @article.editor = current_user
+
+    if @article.update(post_params)
+      redirect_to article_url(@article), notice: "Article successfully edited!"
+    else
+      @errors = @article.errors.full_messages
+
+      @article = find_and_ensure_article(params[:id])
+
+      category_array = []
+      Category.all.each { |category| category_array << [category.name, category.id] }
+      @category = category_array
+      render "articles/edit"
+    end
+>>>>>>> master
   end
 
   def destroy
@@ -48,7 +70,7 @@ class ArticlesController < ApplicationController
 
   def find_and_ensure_article(id)
     article = Article.find_by(id: id)
-    render :file => "#{Rails.root}/public/404.html", :status => 404 unless article && article.is_published == true
+    render :file => "#{Rails.root}/public/404.html", :status => 404 unless article && (article.is_published == true || authorized?(article.author))
     article
   end
 

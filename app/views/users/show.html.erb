@@ -2,29 +2,41 @@
 
 <p class="notice"><b><%= notice %></b></p>
 
-<p>PLACEHOLDER FOR PROFILE PICTURE</p>
+<p><img src="<%= @user.profile_pic_url %>"></p>
 <p>PLACEHOLDER FOR USER BIO</p>
-<p>PLACEHOLDER FOR NEW ARTICLE BUTTON</p>
 
-<% if logged_in? %>
+<% if logged_in? && authorized?(@user) %>
   <%= link_to "Create a New Article!", new_article_path%>
 <% end %>
-<p>PLACEHOLDER FOR SAVED DRAFTS FUNCTIONALITY</p>
 
-<h3>Authored Articles</h3>
-
-<ul class="authored_articles">
-<% @user.articles.each do |article| %>
-  <li><%= link_to article.title, article_path(article)%>
-  </li>
+<% if logged_in? && authorized?(@user) %>
+<div class="unpublished-articles">
+  <h3>Unfinished Works</h3>
+  <ul class="unpublished_articles">
+  <% @user.unpublished_articles.each do |article| %>
+    <li><%= link_to article.title, article_path(article)%>
+    </li>
+  <% end %>
+  </ul>
+</div>
 <% end %>
-</ul>
 
-<h3>Authored Comments</h3>
+<div class="published-articles">
+  <h3>Authored Articles</h3>
+  <ul class="authored_articles">
+  <% @user.published_articles.each do |article| %>
+    <li><%= link_to article.title, article_path(article)%>
+    </li>
+  <% end %>
+  </ul>
+</div>
 
-<ul class="authored_comments">
-<% @user.comments.each do |comment| %>
-  <li><%= link_to comment.body, article_path(comment.article)%>
-  </li>
-<% end %>
-</ul>
+<div class="authored-comments">
+  <h3>Authored Comments</h3>
+  <ul class="authored_comments">
+  <% @user.comments.each do |comment| %>
+    <li><%= link_to comment.body.html_safe, article_path(comment.article)%>
+    </li>
+  <% end %>
+  </ul>
+</div>

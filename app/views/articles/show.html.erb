@@ -4,10 +4,17 @@
 
 <h2><%= @article.title %></h2>
 
+<h3>Category: <%= @article.category.name %></h3>
+
 <div class="article-info">
   <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
   <p><%= @article.body.html_safe %></p>
-  <span>PLACEHOLDER FOR FLAG</span>
+  <span>PLACEHOLDER FOR FLAG</span><br><br>
+
+  <% if logged_in? %>
+      <%= link_to "Edit Article!", edit_article_path(@article)%>
+  <% end %>
+
 </div>
 
 <h2>Comments</h2>
