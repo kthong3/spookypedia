@@ -1,12 +1,15 @@
 <div class="category-container">
 	<div class="article-box">
-		<span><h3><%= @category.name %></h3></span>	
+		<span><h3><%= @category.name %></h3></span>
+		<% if logged_in? %>
+		  <%= link_to "Create a New Article!", new_article_path%>
+		<% end %>
 		<ul>
 			<% @articles.each do |article| %>
 				<li><%= link_to article.title, article %></li>
 	  	<% end %>
-		</ul> 
-	</div>		
+		</ul>
+	</div>
 
 	<div class="featured-article">
 		<span>
