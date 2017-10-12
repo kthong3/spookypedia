@@ -4,6 +4,8 @@ feature "visiting the homepage" do
 
   scenario "the user sees a list of the categories, and can visit them" do
     category1 = Category.create(name: "Halloween Stuff")
+    author1 = User.create(username: "TestUser", is_admin: "false", email: "test@test.none", password: "password")
+    art1 = category1.articles.create(title: "This is a Halloween post", body: "STuff and things and whatnot.", author_id: author1.id)
 
     visit '/'
 
@@ -39,11 +41,5 @@ feature "visiting the homepage" do
 
     expect(page).to have_current_path category_path(category1)
   end
-
-  scenario "the user can log into their account"
-
-  scenario "the user can log out of their account"
-
-  scenario "the user can register"
 
 end
