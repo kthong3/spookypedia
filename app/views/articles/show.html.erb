@@ -1,7 +1,7 @@
 <h2><%= @article.title %></h2>
 
 <div class="article-info">
-  <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %></span><br>
+  <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
   <p><%= @article.body %></p>
   <span>PLACEHOLDER FOR FLAG</span>
 </div>
@@ -11,7 +11,7 @@
   <% @article.comments.each do |comment| %>
   <div class="comment">
     <p><%= comment.body %><br>
-    Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %></p>
+    Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %>.</p>
   </div>
   <span>PLACEHOLDER FOR FLAG</span>
   <% end %>
@@ -20,7 +20,7 @@
 <%= form_for :comment, url: article_comments_path(:article_id) do |comment| %>
   <span>
     <%= comment.label "Write a new comment!" %><br>
-    <%= comment.text_area :commentname, :cols => "100", :rows => "10" %>
+    <%= comment.text_area :body, :cols => "100", :rows => "10" %>
   </span><br>
     <%= comment.submit value="Comment!" %>
 <% end %>
