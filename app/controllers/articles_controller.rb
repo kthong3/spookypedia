@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def new
     authenticate!
+    @default_category_id = params[:cat_id]
     category_array = []
     Category.all.each { |category| category_array << [category.name, category.id] }
     @category = category_array
@@ -34,9 +35,32 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    authenticate!
+
+    @article = find_and_ensure_article(params[:id])
+
+    category_array = []
+    Category.all.each { |category| category_array << [category.name, category.id] }
+    @category = category_array
   end
 
   def update
+    authenticate!
+
+    @article = find_and_ensure_article(params[:id])
+
+    if @article.update(post_params)
+      redirect_to article_url(@article), notice: "Article successfully edited!"
+    else
+      @errors = @article.errors.full_messages
+
+      @article = find_and_ensure_article(params[:id])
+
+      category_array = []
+      Category.all.each { |category| category_array << [category.name, category.id] }
+      @category = category_array
+      render "articles/edit"
+    end
   end
 
   def destroy
