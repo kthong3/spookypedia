@@ -2,7 +2,7 @@
 	<div class="article-box">
 		<span><h3><%= @category.name %></h3></span>
 		<% if logged_in? %>
-		  <%= link_to "Create a New Article!", new_article_path%>
+		  <%= link_to "Create a New Article!", new_article_path(:cat_id => @category.id) %>
 		<% end %>
 		<ul>
 			<% @articles.each do |article| %>

@@ -1,4 +1,6 @@
-<h1>Create a new article!</h2>
+<% if logged_in? %>
+
+<h1>Edit your article!</h2>
 
 <% if @errors %>
 <ul class='errors'>
@@ -8,9 +10,9 @@
 </ul>
 <% end %>
 
-<%= form_for :article, url: articles_path do |article| %>
+<%= form_for @article do |article| %>
 
-  <%= article.select :category_id, options_for_select(@category, selected = @default_category_id) %>
+  <%= article.select :category_id, options_for_select(@category, selected = @article.category_id) %>
 
   <p>
     <%= article.label :title %></br>
@@ -22,10 +24,13 @@
     <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
   </p>
 
-  <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
-
-
   <p>
     <%= article.submit value="Submit" %>
   </p>
+<% end %>
+
+<% else %>
+
+<h1>Sorry, you do not have authorization to view this page!</h1>
+
 <% end %>
