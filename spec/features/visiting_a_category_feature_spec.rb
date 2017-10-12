@@ -12,7 +12,7 @@ feature "visiting a category page" do
 
 		within(".article-box") do
       expect(page).to have_content art1.title
-      expect(page).to have_content art1.title
+      expect(page).to have_content art2.title
 
       click_link("#{art1.title}")
     end
@@ -20,6 +20,21 @@ feature "visiting a category page" do
     expect(page).to have_current_path article_path(art1)
 	end
 
-	scenario "user can see a featured article on for the category"
+	scenario "user can see a featured article on for the category" do
+		category1 = Category.create(name: "Halloween Stuff")
+		author1 = User.create(username: "TestUser", is_admin: "false", email: "test@test.none", password: "password")
+		author2 = User.create(username: "AlsoTestUser", is_admin: "false", email: "secondtest@test.none", password: "password")
+		art1 = category1.articles.create(title: "This is a Halloween post", body: "STuff and things and whatnot.", author_id: author1.id)
+
+		visit "/categories/#{category1.id}"
+
+		within("featured-article") do
+      expect(page).to have_content art1.title
+      expect(page).to have_content art1.body
+    end
+
+	end
+
+
 
 end

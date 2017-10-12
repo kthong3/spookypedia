@@ -1,12 +1,15 @@
 <div class="article-box">
-	<span><%= @category.name %></span>	
+	<span><h3><%= @category.name %></h3></span>	
 	<ul>
-		<% @category.articles.each do |article| %>
-		<li><%= link_to article.title, article %></li>
+		<% @articles.each do |article| %>
+			<li><%= link_to article.title, article %></li>
+  	<% end %>
 	</ul> 
-  <% end %>
 </div>	
 
 <div class="featured-article">
-	FEATURED ARTICLE HERE
+	<span>
+		<h3><%= @articles.first.title %></h3>
+	</span>
+	<div class="article-content"><%= @articles.first.body%></div>
 </div>
