@@ -21,10 +21,8 @@
 
 <% if logged_in? %>
   <%= form_for :comment, url: article_comments_path(@article) do |comment| %>
-    <span>
-      <%= comment.label "Write a new comment!" %><br>
-      <%= comment.text_area :body, :cols => "100", :rows => "10" %>
-    </span><br>
+      <p>Write a new comment!</p>
+      <%= comment.text_area :body, :cols => "100", :rows => "10" %><br>
       <%= comment.submit value="Comment!" %>
   <% end %>
 <% end %>
