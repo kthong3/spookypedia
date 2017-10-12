@@ -4,12 +4,14 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    authenticate!
     category_array = []
     Category.all.each { |category| category_array << [category.name, category.id] }
     @category = category_array
   end
 
   def create
+    authenticate!
     article = Article.new(post_params)
     article.author_id = current_user.id
     if article.save

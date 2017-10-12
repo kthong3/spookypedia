@@ -19,7 +19,7 @@
 
   <p>
     <%= article.label :body %></br>
-    <%= article.text_area :body, :cols => "100", :rows => "10" %>
+    <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
   </p>
 
   <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
