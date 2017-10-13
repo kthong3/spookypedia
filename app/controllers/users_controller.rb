@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     user = User.new(post_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to categories_url
+      redirect_to categories_url, notice: "Thanks for registering! Enjoy your stay!"
     else
       @errors = user.errors.full_messages
       render "users/new"

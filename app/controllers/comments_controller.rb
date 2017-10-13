@@ -23,24 +23,13 @@ class CommentsController < ApplicationController
 
   def update
     comment = find_and_ensure_comment(params[:id])
+    @article = comment.article
     if params[:commit] == "Flag"
       comment.update(is_flagged: true)
-      @article = comment.article
-      render 'articles/show' and return
+    elsif params[:commit] == "Flagged" && current_user.is_admin?
+      comment.update(is_flagged: false)
     end
-
-    # authenticate!
-
-    # if @article.update(post_params)
-    #   redirect_to article_url(@article), notice: "Article successfully edited!"
-    # else
-    #   @errors = @article.errors.full_messages
-    #   @article = find_and_ensure_article(params[:id])
-    #   category_array = []
-    #   Category.all.each { |category| category_array << [category.name, category.id] }
-    #   @category = category_array
-    #   render "articles/edit"
-    # end
+    render 'articles/show'
   end
 
   def destroy

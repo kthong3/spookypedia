@@ -46,9 +46,11 @@ class ArticlesController < ApplicationController
 
   def update
     @article = find_and_ensure_article(params[:id])
-
     if params[:commit] == "Flag"
       @article.update(is_flagged: true)
+      render 'articles/show' and return
+    elsif params[:commit] == "Flagged" && current_user.is_admin?
+      @article.update(is_flagged: false)
       render 'articles/show' and return
     end
 

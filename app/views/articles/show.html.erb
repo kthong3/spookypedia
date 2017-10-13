@@ -9,14 +9,6 @@
 <div class="article-info">
   <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
   <p><%= @article.body.html_safe %></p>
-  <% if @article.is_flagged == false %>
-    <%= form_for @article, html: {:is_flagged => true} do |article| %>
-      <%= article.submit value="Flag" %>
-    <% end %>
-  <% else  %>
-    <%= button_to 'Flagged', {}, :disabled => @article.is_flagged? %>
-  <% end %>
-
   <% if logged_in? %>
     <%= link_to "Edit Article!", edit_article_path(@article)%>
   <% end %>
@@ -24,6 +16,18 @@
   <% if logged_in? && (@article.author || current_user.is_admin) %>
     <%= link_to "See revision history", article_revisions_path(@article) %>
   <% end %>
+  <% if @article.is_flagged == false %>
+    <%= form_for @article do |article| %>
+      <%= article.submit value="Flag" %>
+    <% end %>
+  <% elsif logged_in? && (@article.is_flagged == true && current_user.is_admin?)  %>
+    <%= form_for @article do |article| %>
+      <%= article.submit value="Flagged" %>
+    <% end %>
+  <% else %>
+    <%= button_to 'Flagged', :disabled => @article.is_flagged? %>
+  <% end %>
+
 
 </div>
 
@@ -35,11 +39,15 @@
     Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %>.</p>
   </div>
     <% if comment.is_flagged == false %>
-      <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch, html: {:is_flagged => true} do |comment| %>
+      <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
         <%= comment.submit value="Flag" %>
       <% end %>
+    <% elsif logged_in? && (comment.is_flagged == true && current_user.is_admin?) %>
+      <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
+        <%= comment.submit value="Flagged" %>
+      <% end %>
     <% else %>
-      <%= button_to 'Flagged', {}, :disabled => comment.is_flagged? %>
+      <%= button_to 'Flagged', :disabled => comment.is_flagged? %>
     <% end %>
   <% end %>
 </div><br>
@@ -52,4 +60,6 @@
       <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
       <%= comment.submit value="Comment!" %>
   <% end %>
+<% else %>
+<p>Don't be a stranger! Register or login to leave a comment!</p>
 <% end %>
