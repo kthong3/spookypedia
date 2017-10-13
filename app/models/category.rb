@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   end
 
   def sample_articles
-    articles.sample(rand(2..4))
+    articles.published.sample(rand(2..4))
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
