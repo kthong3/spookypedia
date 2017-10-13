@@ -23,4 +23,8 @@ class User < ApplicationRecord
   def unpublished_articles
     self.articles.select { |article| article.is_published == false }
   end
+
+  def is_admin?
+    self.is_admin == true
+  end
 end
