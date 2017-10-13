@@ -41,11 +41,13 @@ feature 'user profile page' do
     comment2 = Comment.create(article_id: article2.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article2.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+      fill_in('user[email]', :with => "#{user.email}")
+      fill_in('user[password]', :with => "#{user.password}")
+      find("input[type='submit']").click
+    end
 
     visit "/users/#{user.id}"
 
