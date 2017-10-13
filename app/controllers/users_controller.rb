@@ -26,8 +26,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     authorize!(@user)
-    p "************"
-    p "EDIT!!!!!!!"
 
     if @user.update(post_params)
       redirect_to user_url(@user), notice: "User bio successfully edited!"
