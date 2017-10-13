@@ -13,6 +13,10 @@ class Article < ApplicationRecord
 
   before_update :log_revision
 
+  def self.random_article
+    order("RANDOM()").first
+  end
+
   def editor
     @editor
   end

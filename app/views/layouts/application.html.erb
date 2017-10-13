@@ -2,16 +2,14 @@
 <html>
   <head>
     <title>Spookypedia</title>
-    <%= csrf_meta_tags %>
 
+    <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Creepster|Lato:300|Oswald:300', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
   <header>
     <!-- Halloween countdown here -->
-    <h1>Spookypedia!</h1>
-  </header>
-  <body>
     <nav>
       <% if current_user %>
         <%= link_to current_user.username, user_path(current_user.id) %> | <%= link_to "Logout", {:controller=> "sessions", :action=> "destroy"}, :method => :delete %> | <%= link_to "Home", categories_path %>
@@ -19,6 +17,9 @@
         <%= link_to "Register", new_user_path %> | <%= link_to "Login", new_session_path %> | <%= link_to "Home", categories_path %>
       <% end %>
     </nav>
+    <h1><%= link_to "Spookypedia!", root_path %></h1>
+  </header>
+  <body>
     <%= yield %>
   </body>
 </html>
