@@ -3,7 +3,7 @@
 
   <% category.sample_articles.each do |article| %>
       <div class="article-preview-container">
-        <p class="category-article-title"><%= link_to article.title.html_safe, article %></p>
+        <h3 class="category-article-title"><%= link_to article.title.html_safe, article %></h3>
         <p class=" category-article-preview">contributed by <%= article.author.username %> | <%= article.comments.count %> | <%=time_ago_in_words(article.created_at) %> ago
         </p>
       </div>

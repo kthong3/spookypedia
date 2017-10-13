@@ -28,7 +28,7 @@ h1:hover {
   color: orange;
 }
 
-h2, h3 {
+h2, h3, h4 {
   font-family: "Creepster";
 }
 
@@ -37,7 +37,12 @@ h2 {
 }
 
 h3 {
-  font-size: 2.7em;
+  font-size: 2.5em;
+}
+
+h4 {
+  font-size: 2em;
+  margin: 0 auto;
 }
 
 a {
@@ -76,8 +81,8 @@ header {
 }
 
 .category-article-title {
-  font-size: 1.25em;
-  /*padding-bottom: 10px;*/
+  /*font-size: 1.25em;*/
+  margin: 5px auto;
   display: block;
 }
 
@@ -87,11 +92,16 @@ header {
 }
 
 .category-article-preview {
-  /*padding-bottom: 20px;*/
+  margin: 0 auto 15px auto;
 }
 
 .category-article-title a {
   color: #F15802;
+  text-decoration: none;
+}
+
+.category-article-title a:hover {
+  color: orange;
 }
 
 .page-container {
@@ -99,11 +109,18 @@ header {
   width: 80%;
 }
 
-.featured_article_container, .featured-article {
+.featured-article-container {
   /*background-color: #7C10AD;*/
-  color: #1BA52C;
+  color: #1BA52C !important;
   padding: 0 5%;
+}
 
+.featured-link a {
+  color: #1BA52C;
+}
+
+.featured-link a:hover {
+  color: orange;
 }
 
 .category-list-container, .article-box {

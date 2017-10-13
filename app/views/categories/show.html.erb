@@ -11,12 +11,13 @@
 		</ul>
 	</div>
 
-	<div class="featured-article-container col-1-2">
-		<span>
-			<h3><%= @featured.title.html_safe %></h3>
-		</span>
-		<span><%= link_to @featured.title.html_safe, article_path(@featured) %></span>
-		<div class="article-content"><%= @featured.body.html_safe%></div>
+	<div class="featured-article-container col-1-3">
+		<h3 class="featured-link"><%= link_to @featured.title.html_safe, article_path(@featured) %></h3>
+		<p>contributed by <%= link_to @featured.author.username, @featured.author %> | <%= @featured.comments.count %> | <%=time_ago_in_words(@featured.created_at) %> ago
+    </p>
+		<div>
+			<%= @featured.body.html_safe %>
+		</div>
 	</div>
 
 </div>
