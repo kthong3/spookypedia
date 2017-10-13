@@ -1,8 +1,13 @@
 <div class="col-2-3 category-box">
-  <h2><%= link_to category.name, category %></h3><br>
+  <h2><%= link_to category.name, category %></h2>
+
   <% category.sample_articles.each do |article| %>
-      <span class="col-2-3 category-article-title"><%= link_to article.title, article %></span>
-      <span class="col-2-3 category-article-preview">contributed by <%= article.author.username %> | <%= article.comments.count %> | <%=time_ago_in_words(article.created_at) %> ago.
-      </span>
+      <div class="article-preview-container">
+        <h3 class="category-article-title"><%= link_to article.title.html_safe, article %></h3>
+        <p class=" category-article-preview">contributed by <%= article.author.username %> | <%= article.comments.count %> | <%=time_ago_in_words(article.created_at) %> ago
+        </p>
+      </div>
   <% end %>
 </div>
+
+
