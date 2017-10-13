@@ -12,7 +12,7 @@ class Comment < ApplicationRecord
   end
 
   def self.flagged_comments
-    self.all.select { |comment| comment.is_flagged == true }
+    select { |comment| comment.is_flagged == true }
   end
 
 end
