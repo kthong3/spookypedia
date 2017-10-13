@@ -21,23 +21,34 @@ class UsersController < ApplicationController
   end
 
   def edit
+    authenticate!
+    @user = find_and_ensure_user(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    authenticate!
+    @user = find_and_ensure_user(params[:id])
     authorize!(@user)
-
-    if @user.update(post_params)
-      redirect_to user_url(@user), notice: "User bio successfully edited!"
-    else
-      @errors = @article.errors.full_messages
-
+    if params[:commit] == "Save Picture"
+      @user.update(profile_pic_url: parse_src(params[:user][:profile_pic_url]))
       render "users/show"
+    else
+      if @user.update(post_params)
+        redirect_to user_url(@user), notice: "User bio successfully edited!"
+      else
+        @errors = @article.errors.full_messages
+        render "users/show"
+      end
     end
-
   end
 
   private
+
+  def parse_src(string)
+    low_index = string.index("//")
+    high_index = string.index("png") + 2
+    string[low_index..high_index]
+  end
 
   def post_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :bio)
