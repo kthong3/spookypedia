@@ -17,12 +17,12 @@ class Category < ApplicationRecord
     cap_search = search.capitalize
     categories = self.where("name LIKE ?", "%#{cap_search}%")
     return categories if categories.count == 0
-    return categories[0].articles if categories.count == 1
-    articles = categories[0].articles
+    articles = categories[0].articles.published
+    return articles if categories.count == 1
     index = 1
     while index < categories.count
-      next_articles = categories[index].articles
-      articles = articles.or(next_articles)
+      next_articles = categories[index].articles.published
+      articles += next_articles
       index += 1
     end
     articles
