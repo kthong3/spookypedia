@@ -10,11 +10,11 @@ feature 'article show page' do
   scenario "the user visits an unpublished article" do
     user = User.create(username: "test", email: "test@test.com", password: "test@test.com", password_confirmation: "test@test.com")
     category1 = Category.create(name: "adorable")
-    article = Article.create(category_id: category1.id, author_id: user.id, title: "test2", body: "take yours")
+    article = Article.create(category_id: category1.id, author_id: user.id, title: "test2", body: "take yours", is_published: true)
 
     visit "/articles/#{article.id}"
 
-    expect(page.status_code).to eq(404)
+    expect(page.status_code).to eq(200)
   end
 
   scenario "the user is not logged in and visits a published article" do
@@ -52,18 +52,20 @@ feature 'article show page' do
     comment2 = Comment.create(article_id: article.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+      fill_in('user[email]', :with => "#{user.email}")
+      fill_in('user[password]', :with => "#{user.password}")
+      find("input[type='submit']").click
+    end
 
     visit "/articles/#{article.id}"
 
     expect(page).to have_current_path article_path(article)
     expect(page.first("h2").text).to eq article.title
     within(".article-info") do
-      expect(page.first("span").text).to eq "Written by #{article.author.username} on #{article.created_at}."
+      expect(page.all("span")[0].text).to eq "Written by #{article.author.username} on #{article.created_at}."
       expect(page.first("p").text).to eq article.body
     end
     expect(page.all("h2")[1].text).to eq "Comments"
