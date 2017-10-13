@@ -20,7 +20,7 @@ class AdminsController < ApplicationController
   def create
     user = User.find_by(id: params[:user][:id])
     user.update(is_admin: true)
-    redirect_to user_admins_url
+    redirect_to user_admins_url, notice: "New admin appointed!"
   end
 
   def destroy
