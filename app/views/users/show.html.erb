@@ -5,6 +5,9 @@
 <p class="notice"><b><%= notice %></b></p>
 
 <p><img src="<%= @user.profile_pic_url %>"></p>
+<% if logged_in? && authorized?(@user) %>
+<%= link_to "Change Profile Pic", edit_user_path(@user) %>
+<% end %>
 
 <p>Bio</p>
 <%= @user.bio.html_safe %>
