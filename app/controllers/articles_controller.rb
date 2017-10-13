@@ -45,18 +45,22 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article = find_and_ensure_article(params[:id])
+
+    if params[:commit] == "Flag"
+      @article.update(is_flagged: true)
+      render 'articles/show' and return
+    end
+
     authenticate!
 
-    @article = find_and_ensure_article(params[:id])
     @article.editor = current_user
 
     if @article.update(post_params)
       redirect_to article_url(@article), notice: "Article successfully edited!"
     else
       @errors = @article.errors.full_messages
-
       @article = find_and_ensure_article(params[:id])
-
       category_array = []
       Category.all.each { |category| category_array << [category.name, category.id] }
       @category = category_array

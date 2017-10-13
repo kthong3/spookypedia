@@ -1,0 +1,7 @@
+<% if @article.is_flagged == false %>
+  <%= form_for @article, html: {:is_flagged => true} do |article| %>
+    <%= article.submit value="Flag" %>
+  <% end %>
+<% else %>
+  <%= button_to 'Flagged', {}, :disabled => @article.is_flagged? %>
+<% end %>
