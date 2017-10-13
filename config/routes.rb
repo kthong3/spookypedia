@@ -5,11 +5,6 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: [:create]
   resources :categories# do
-    # resources :articles do
-      # resources :comments, except: [:new, :index]
-      # resources :revisions, only: [:create, :index]
-    # end
-  # end
   resources :articles do
     resources :comments, except: [:new, :index]
     resources :revisions, only: [:create, :index]
