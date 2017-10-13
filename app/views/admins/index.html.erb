@@ -13,7 +13,7 @@
   <h3>Flagged Comments</h3>
   <ul>
   <% @comments.each do |comment| %>
-    <li><%= link_to comment.body, article_path(comment.article) %></li>
+    <li><%= link_to comment.body.html_safe, article_path(comment.article) %></li>
   <% end %>
   </ul>
 </div>
