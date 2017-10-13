@@ -46,7 +46,7 @@
 
 <p class="alert"><%= alert %></p>
 
-<% if logged_in? %>
+<% if current_user %>
   <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
       <p>Write a new comment!</p>
       <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>

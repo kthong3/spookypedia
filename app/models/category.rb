@@ -4,7 +4,11 @@ class Category < ApplicationRecord
   has_many :comments, through: :articles
 
   def top_articles
-    self.articles.select { |article| (article.comments.count > 2) }
+    articles.select { |article| (article.comments.count > 2) }
+  end
+
+  def sample_articles
+    articles.sample(rand(2..4))
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
