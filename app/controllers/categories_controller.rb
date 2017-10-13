@@ -6,9 +6,24 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    authenticate!
+    @user = current_user
+    render :file => "#{Rails.root}/public/404.html", :status => 404 and return unless @user.is_admin?
   end
 
   def create
+    authenticate!
+    @user = current_user
+    render :file => "#{Rails.root}/public/404.html", :status => 404 and return unless @user.is_admin?
+
+    category = Category.new(post_params)
+
+    if category.save
+      redirect_to category_url(category), notice: "Category successfully created!"
+    else
+      @errors = category.errors.full_messages
+      render "categories/new"
+    end
   end
 
   def show
@@ -18,5 +33,9 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+  end
+
+  def post_params
+    params.require(:category).permit(:name)
   end
 end
