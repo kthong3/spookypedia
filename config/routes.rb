@@ -19,5 +19,6 @@ Rails.application.routes.draw do
 
   get '/sessions' => 'sessions#new', as: :new_session
   delete "/sessions" => 'sessions#destroy', as: :logout
+  patch '/articles/:article_id/revisions/:id' => 'revisions#revise', as: :revise
 
 end

@@ -62,8 +62,9 @@ class ArticlesController < ApplicationController
       @category = category_array
       render "articles/edit"
     end
->>>>>>> master
   end
+
+
 
   def destroy
   end

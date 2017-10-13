@@ -32,7 +32,10 @@ class Article < ApplicationRecord
     elsif revision.revised_attribute == "body"
       self.body = revision.before_value
     end
+    self.save
   end
+
+
 
   private
 
