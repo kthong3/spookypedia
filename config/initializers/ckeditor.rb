@@ -9,6 +9,7 @@ Ckeditor.setup do |config|
   Ckeditor.setup do |config|
     # //cdn.ckeditor.com/<version.number>/<distribution>/ckeditor.js
     config.cdn_url = "//cdn.ckeditor.com/4.6.1/basic/ckeditor.js"
+
   end
 
   # Allowed image file types for upload.
@@ -60,4 +61,13 @@ Ckeditor.setup do |config|
   # Used when CKEditor CDN enabled
   # By default: "ckeditor/config.js"
   # config.js_config_url = 'ckeditor/config.js'
+
+  #handle custom addons
+  assets_root =  Rails.root.join('app','assets','javascripts')
+  ckeditor_plugins_root = assets_root.join('ckeditor','plugins')
+  %w(openlink sourcedialog).each do |ckeditor_plugin|
+    Ckeditor.assets += Dir[ckeditor_plugins_root.join(ckeditor_plugin, '**', '*.js')].map do |x|
+      x.sub(assets_root.to_path, '').sub(/^\/+/, '')
+    end
+  end
 end

@@ -20,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'ckeditor'
 gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
