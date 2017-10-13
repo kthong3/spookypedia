@@ -15,6 +15,8 @@
     <nav>
       <% if !logged_in? %>
       <%= link_to "Register", new_user_path %> | <%= link_to "Login", new_session_path %> | <%= link_to "Home", categories_path %>
+      <% elsif logged_in? && current_user.is_admin? %>
+      <%= link_to current_user.username, user_path(current_user.id) %> | <%= link_to "Logout", {:controller=> "sessions", :action=> "destroy"}, :method => :delete %> | <%= link_to "Home", categories_path %> | <%= link_to "Admin", user_admins_path(current_user) %>
       <% else %>
       <%= link_to current_user.username, user_path(current_user.id) %> | <%= link_to "Logout", {:controller=> "sessions", :action=> "destroy"}, :method => :delete %> | <%= link_to "Home", categories_path %>
       <% end %>

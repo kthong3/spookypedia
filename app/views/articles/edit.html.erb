@@ -1,6 +1,10 @@
 <% if logged_in? %>
 
-<h1>Edit your article!</h2>
+<% if authorized?(@article.author) %>
+<h1>Edit your article!</h1>
+<% else %>
+<h1>Edit the article!</h1>
+<% end %>
 
 <% if @errors %>
   <ul class='errors'>
