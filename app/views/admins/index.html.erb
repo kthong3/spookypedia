@@ -2,6 +2,11 @@
 
 <p class="notice"><b><%= notice %></b></p>
 
+<div class="create-category">
+  <h3>Create Category</h3>
+  <%= link_to "Create a New Category!", new_category_path %>
+</div>
+
 <div class="flagged-articles">
   <h3>Flagged Articles</h3>
   <ul>
@@ -36,3 +41,6 @@
     <%= user.submit value="Appoint" %>
   <% end %>
 </div>
+
+
+
