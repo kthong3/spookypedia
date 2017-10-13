@@ -12,7 +12,11 @@
   <span>PLACEHOLDER FOR FLAG</span><br><br>
 
   <% if logged_in? %>
-      <%= link_to "Edit Article!", edit_article_path(@article)%>
+    <%= link_to "Edit Article!", edit_article_path(@article)%>
+  <% end %>
+
+  <% if logged_in? && (@article.author || current_user.is_admin) %>
+    <%= link_to "See revision history", article_revisions_path(@article) %>
   <% end %>
 
 </div>

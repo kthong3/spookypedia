@@ -48,6 +48,7 @@ class ArticlesController < ApplicationController
     authenticate!
 
     @article = find_and_ensure_article(params[:id])
+    @article.editor = current_user
 
     if @article.update(post_params)
       redirect_to article_url(@article), notice: "Article successfully edited!"
@@ -62,6 +63,8 @@ class ArticlesController < ApplicationController
       render "articles/edit"
     end
   end
+
+
 
   def destroy
     @article = find_and_ensure_article(params[:id])
