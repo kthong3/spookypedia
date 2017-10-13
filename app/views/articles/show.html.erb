@@ -1,7 +1,7 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
 <div class="page-container">
-  <p class="notice"><b><%= notice %></b></p>
   <div class="article-box col-3-4">
+    <p class="notice"><b><%= notice %></b></p>
     <h2><%= @article.title %></h2>
 
     <h3>Category: <%= link_to @article.category.name, @article.category %></h3>
@@ -54,14 +54,17 @@
 
       <p class="alert"><%= alert %></p>
 
-      <% if current_user %>
-      <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
-      <p>Write a new comment!</p>
-      <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
-      <%= comment.submit value="Comment!" %>
-      <% end %>
-      <% else %>
-      <p>Don't be a stranger! Register or login to leave a comment!</p>
-      <% end %>
+      <div class="submit-comment">
+        <% if current_user %>
+        <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
+        <p>Write a new comment!</p>
+        <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
+        <%= comment.submit value="Comment!" %>
+        <% end %>
+        <% else %>
+        <p>Don't be a stranger! Register or login to leave a comment!</p>
+        <% end %>
+      </div>
     </div>
   </div>
+

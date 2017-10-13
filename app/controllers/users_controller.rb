@@ -30,7 +30,6 @@ class UsersController < ApplicationController
     @user = find_and_ensure_user(params[:id])
     authorize!(@user)
     if params[:commit] == "Save Picture"
-      @user.update(profile_pic_url: parse_src(params[:user][:profile_pic_url]))
       render "users/show"
     else
       if @user.update(post_params)
@@ -44,14 +43,8 @@ class UsersController < ApplicationController
 
   private
 
-  def parse_src(string)
-    low_index = string.index("//")
-    high_index = string.index("png") + 2
-    string[low_index..high_index]
-  end
-
   def post_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :bio)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :bio, :image)
   end
 
   def find_and_ensure_user(id)

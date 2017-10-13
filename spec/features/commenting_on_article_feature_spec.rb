@@ -9,15 +9,19 @@ feature 'comment on article' do
     comment2 = Comment.create(article_id: article.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+        fill_in('user[email]', :with => "#{user.email}")
+        fill_in('user[password]', :with => "#{user.password}")
+        find("input[type='submit']").click
+    end
 
     visit "/articles/#{article.id}"
 
-    find("input[type='submit']").click
+    within(".submit-comment") do
+        find("input[type='submit']").click
+    end
 
     expect(page).to have_current_path article_path(article)
     expect(page.should have_css(".alert"))
@@ -32,16 +36,20 @@ feature 'comment on article' do
     comment2 = Comment.create(article_id: article.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+        fill_in('user[email]', :with => "#{user.email}")
+        fill_in('user[password]', :with => "#{user.password}")
+        find("input[type='submit']").click
+    end
 
     visit "/articles/#{article.id}"
 
-    fill_in('comment[body]', :with => "hey")
-    find("input[type='submit']").click
+    within(".submit-comment") do
+        fill_in('comment[body]', :with => "hey")
+        find("input[type='submit']").click
+    end
 
     expect(page).to have_current_path article_path(article)
     within(".article-comments") do
@@ -59,16 +67,20 @@ feature 'comment on article' do
     comment2 = Comment.create(article_id: article.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+        fill_in('user[email]', :with => "#{user.email}")
+        fill_in('user[password]', :with => "#{user.password}")
+        find("input[type='submit']").click
+    end
 
     visit "/articles/#{article.id}"
 
-    fill_in('comment[body]', :with => "<u>underline</u> this")
-    find("input[type='submit']").click
+    within(".submit-comment") do
+        fill_in('comment[body]', :with => "<u>underline</u> this")
+        find("input[type='submit']").click
+    end
 
     expect(page).to have_current_path article_path(article)
     within(".article-comments") do
@@ -86,16 +98,20 @@ feature 'comment on article' do
     comment2 = Comment.create(article_id: article.id, author_id: user.id, body: "af")
     comment3 = Comment.create(article_id: article.id, author_id: user.id, body: "afasdf")
 
-    visit '/sessions'
+    visit new_session_path
 
-    fill_in('user[email]', :with => "#{user.email}")
-    fill_in('user[password]', :with => "#{user.password}")
-    find("input[type='submit']").click
+    within(".user-views") do
+        fill_in('user[email]', :with => "#{user.email}")
+        fill_in('user[password]', :with => "#{user.password}")
+        find("input[type='submit']").click
+    end
 
     visit "/articles/#{article.id}"
 
-    fill_in('comment[body]', :with => "<u>underline</u> this")
-    find("input[type='submit']").click
+    within(".submit-comment") do
+        fill_in('comment[body]', :with => "<u>underline</u> this")
+        find("input[type='submit']").click
+    end
 
     expect(page).to have_current_path article_path(article)
     within(".article-comments") do

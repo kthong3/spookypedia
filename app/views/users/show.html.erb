@@ -1,69 +1,71 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
 
 <div class="page-container">
-<div class="user-views">
-<h1><%= @user.username %></h1>
+  <div class="user-views">
+    <h1><%= @user.username %></h1>
 
-<p class="notice"><b><%= notice %></b></p>
+    <p class="notice"><b><%= notice %></b></p>
 
-<div class="profile-picture-container"><img src="<%= @user.profile_pic_url %>"></div>
-<% if logged_in? && authorized?(@user) %>
-<%= link_to "Change Profile Pic", edit_user_path(@user) %>
-<% end %>
+    <div class="profile-picture-container">
+      <%= image_tag @user.image %>
+    </div>
+    <% if logged_in? && authorized?(@user) %>
+    <%= link_to "Change Profile Pic", edit_user_path(@user) %>
+    <% end %>
 
-<p>Bio</p>
-<%= @user.bio.html_safe %>
+    <p>Bio</p>
+    <%= @user.bio.html_safe %>
 
-<% if logged_in? && authorized?(@user) %>
+    <% if logged_in? && authorized?(@user) %>
 
-  <%= form_for @user do |user| %>
+    <%= form_for @user do |user| %>
 
     <p>
-    <%= user.cktext_area :bio, ckeditor: { language: 'en' }%>
+      <%= user.cktext_area :bio, ckeditor: { language: 'en' }%>
     </p>
 
     <p>
-    <%= user.submit value="Submit" %>
-  </p>
+      <%= user.submit value="Submit" %>
+    </p>
 
-  <% end %>
+    <% end %>
 
-<% end %>
+    <% end %>
 
-<% if logged_in? && authorized?(@user) %>
-  <%= link_to "Create a New Article!", new_article_path%>
-<% end %>
+    <% if logged_in? && authorized?(@user) %>
+    <%= link_to "Create a New Article!", new_article_path%>
+    <% end %>
 
-<% if logged_in? && authorized?(@user) %>
-<div class="unpublished-articles">
-  <h3>Unfinished Works</h3>
-  <ul class="unpublished_articles">
-  <% @user.unpublished_articles.each do |article| %>
-    <li><%= link_to article.title, article_path(article)%>
-    </li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
+    <% if logged_in? && authorized?(@user) %>
+    <div class="unpublished-articles">
+      <h3>Unfinished Works</h3>
+      <ul class="unpublished_articles">
+        <% @user.unpublished_articles.each do |article| %>
+        <li><%= link_to article.title, article_path(article)%>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
 
-<div class="published-articles">
-  <h3>Authored Articles</h3>
-  <ul class="authored_articles">
-  <% @user.published_articles.each do |article| %>
-    <li><%= link_to article.title, article_path(article)%>
-    </li>
-  <% end %>
-  </ul>
-</div>
+    <div class="published-articles">
+      <h3>Authored Articles</h3>
+      <ul class="authored_articles">
+        <% @user.published_articles.each do |article| %>
+        <li><%= link_to article.title, article_path(article)%>
+        </li>
+        <% end %>
+      </ul>
+    </div>
 
-<div class="authored-comments">
-  <h3>Authored Comments</h3>
-  <ul class="authored_comments">
-  <% @user.comments.each do |comment| %>
-    <li><%= link_to comment.body.html_safe, article_path(comment.article)%>
-    </li>
-  <% end %>
-  </ul>
-</div>
-</div>
+    <div class="authored-comments">
+      <h3>Authored Comments</h3>
+      <ul class="authored_comments">
+        <% @user.comments.each do |comment| %>
+        <li><%= link_to comment.body.html_safe, article_path(comment.article)%>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
