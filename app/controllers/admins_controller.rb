@@ -18,9 +18,13 @@ class AdminsController < ApplicationController
   end
 
   def create
+    authenticate!
+    @user = current_user
+    render :file => "#{Rails.root}/public/404.html", :status => 404 and return unless @user.is_admin?
+
     user = User.find_by(id: params[:user][:id])
     user.update(is_admin: true)
-    redirect_to user_admins_url
+    redirect_to user_admins_url, notice: "New admin appointed!"
   end
 
   def destroy

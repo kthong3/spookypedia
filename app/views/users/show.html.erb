@@ -1,10 +1,12 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
 
+<div class="page-container">
+<div class="user-views">
 <h1><%= @user.username %></h1>
 
 <p class="notice"><b><%= notice %></b></p>
 
-<p><img src="<%= @user.profile_pic_url %>"></p>
+<div class="profile-picture-container"><img src="<%= @user.profile_pic_url %>"><img src="<%= @user.profile_pic_url %>"></div>
 <% if logged_in? && authorized?(@user) %>
 <%= link_to "Change Profile Pic", edit_user_path(@user) %>
 <% end %>
@@ -62,4 +64,6 @@
     </li>
   <% end %>
   </ul>
+</div>
+</div>
 </div>
