@@ -14,17 +14,32 @@ class User < ApplicationRecord
   def init
     self.is_admin ||= false
     self.is_banned ||= false
+    self.bio ||= "Apparently, this user prefers to keep an air of mystery about them"
   end
 
   def published_articles
-    self.articles.select { |article| article.is_published == true }
+    self.articles.published
   end
 
   def unpublished_articles
-    self.articles.select { |article| article.is_published == false }
+    self.articles.unpublished
   end
 
   def is_admin?
     self.is_admin == true
+  end
+
+  def self.article_search(search)
+    authors = self.where("username LIKE ?", "%#{search}%")
+    return authors if authors.count == 0
+    return authors[0].articles if authors.count == 1
+    articles = authors[0].articles
+    index = 1
+    while index < authors.count
+      next_articles = authors[index].articles
+      articles = articles.or(next_articles)
+      index += 1
+    end
+    articles
   end
 end

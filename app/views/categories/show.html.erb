@@ -13,9 +13,10 @@
 
 	<div class="featured-article-container col-1-2">
 		<span>
-			<h3><%= @featured.title %></h3>
+			<h3><%= @featured.title.html_safe %></h3>
 		</span>
 		<span><%= link_to @featured.title.html_safe, article_path(@featured) %></span>
 		<div class="article-content"><%= @featured.body.html_safe%></div>
 	</div>
+
 </div>
