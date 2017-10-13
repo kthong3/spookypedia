@@ -27,4 +27,18 @@ class User < ApplicationRecord
   def is_admin?
     self.is_admin == true
   end
+
+  def self.article_search(search)
+    authors = self.where("username LIKE ?", "%#{search}%")
+    return authors if authors.count == 0
+    return authors[0].articles if authors.count == 1
+    articles = authors[0].articles
+    index = 1
+    while index < authors.count
+      next_articles = authors[index].articles
+      articles = articles.or(next_articles)
+      index += 1
+    end
+    articles
+  end
 end

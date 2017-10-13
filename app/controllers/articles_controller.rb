@@ -1,7 +1,12 @@
 class ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all
+    if params[:search]
+      @articles = Article.search(params[:search])
+      render "articles/index"
+    else
+      redirect_to categories_url
+    end
   end
 
   def new

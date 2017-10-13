@@ -25,7 +25,7 @@
       <%= article.submit value="Flagged" %>
     <% end %>
   <% else %>
-    <%= button_to 'Flagged', :disabled => @article.is_flagged? %>
+    <%= button_to 'Flagged', {}, :disabled => @article.is_flagged? %>
   <% end %>
 
 
@@ -47,7 +47,7 @@
         <%= comment.submit value="Flagged" %>
       <% end %>
     <% else %>
-      <%= button_to 'Flagged', :disabled => comment.is_flagged? %>
+      <%= button_to 'Flagged', {}, :disabled => comment.is_flagged? %>
     <% end %>
   <% end %>
 </div><br>
