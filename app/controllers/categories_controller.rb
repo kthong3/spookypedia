@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
+    @featured_article = Article.random_article
   end
 
   def new
@@ -14,12 +15,6 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @articles = Article.where(category_id: @category.id)
     @featured = @articles.sample
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def destroy

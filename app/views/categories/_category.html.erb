@@ -1,8 +1,8 @@
-<div class="category-box">
-  <%= link_to category.name, category %><br>
-  <% category.articles.each do  |article| %>
-      <%= article.title%>
-      <span class="category-article-preview">Article stats go here.
+<div class="col-2-3 category-box">
+  <h2><%= link_to category.name, category %></h3><br>
+  <% category.sample_articles.each do |article| %>
+      <span class="col-2-3 category-article-title"><%= link_to article.title, article %></span>
+      <span class="col-2-3 category-article-preview">contributed by <%= article.author.username %> | <%= article.comments.count %> | <%=time_ago_in_words(article.created_at) %> ago.
       </span>
   <% end %>
 </div>

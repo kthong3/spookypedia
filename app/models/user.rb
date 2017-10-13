@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :articles, foreign_key: :author_id
   has_many :comments, foreign_key: :author_id
   has_many :active_categories, through: :articles, source: :category
+  has_many :revisions, foreign_key: :editor_id
+
   after_initialize :init
 
   has_secure_password
@@ -20,5 +22,9 @@ class User < ApplicationRecord
 
   def unpublished_articles
     self.articles.select { |article| article.is_published == false }
+  end
+
+  def is_admin?
+    self.is_admin == true
   end
 end

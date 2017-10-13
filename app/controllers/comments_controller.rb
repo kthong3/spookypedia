@@ -15,13 +15,15 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
-
   def update
+    comment = find_and_ensure_comment(params[:id])
+    @article = comment.article
+    if params[:commit] == "Flag"
+      comment.update(is_flagged: true)
+    elsif params[:commit] == "Flagged" && current_user.is_admin?
+      comment.update(is_flagged: false)
+    end
+    render 'articles/show'
   end
 
   def destroy
@@ -31,5 +33,12 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+
+  def find_and_ensure_comment(id)
+    comment = Comment.find_by(id: id)
+    render :file => "#{Rails.root}/public/404.html", :status => 404 unless comment
+    comment
   end
 end
