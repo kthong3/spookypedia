@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171012093900) do
     t.string "profile_pic_url"
     t.boolean "is_admin"
     t.boolean "is_banned"
+    t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string  :profile_pic_url
       t.boolean :is_admin
       t.boolean :is_banned
+      t.text    :bio
 
       t.timestamps
     end
