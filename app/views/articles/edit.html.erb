@@ -28,6 +28,10 @@
     <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
   </p>
 
+  <% if authorized?(@article.author) && !(@article.is_published)%>
+    <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
+  <% end %>
+
   <p>
     <%= article.submit value="Submit" %>
   </p>
@@ -40,7 +44,6 @@
     <%= article.submit value="DELETE" %>
     </p>
   <% end %>
-
 
 <% end %>
 
