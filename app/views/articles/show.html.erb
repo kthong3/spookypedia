@@ -54,6 +54,7 @@
 
 <p class="alert"><%= alert %></p>
 
+<div class="submit-comment">
 <% if current_user %>
   <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
       <p>Write a new comment!</p>
@@ -63,5 +64,6 @@
 <% else %>
 <p>Don't be a stranger! Register or login to leave a comment!</p>
 <% end %>
+</div>
 </div>
 </div>
