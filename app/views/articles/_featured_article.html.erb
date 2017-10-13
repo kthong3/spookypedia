@@ -1,5 +1,5 @@
  <h4 class="featured-link"><%= link_to @featured_article.title.html_safe, @featured_article %></h4>
-  <span class="featured-article-stats">contributed by <%= @featured_article.author.username %> | <%= @featured_article.comments.count %> | <%=time_ago_in_words(@featured_article.created_at) %> ago</span>
+  <span class="featured-article-stats">contributed by <%= @featured_article.author.username %> | <%= @featured_article.comments.count %> comments | <%=time_ago_in_words(@featured_article.created_at) %> ago</span>
   <div id="featured_article_body">
     <p>
       <%= @featured_article.body.html_safe %>
