@@ -24,7 +24,11 @@ h1 a {
   text-decoration: none;
 }
 
-h1:hover {
+nav a:hover {
+  color: orange;
+}
+
+h1 a:hover {
   color: orange;
 }
 
@@ -34,6 +38,10 @@ h2, h3, h4 {
 
 h2 {
   font-size: 3.25em;
+}
+
+h2 a:hover {
+  color: orange;
 }
 
 h3 {
@@ -51,6 +59,10 @@ a {
 
 a:hover {
   color: orange;
+}
+
+a:visited {
+  color: #1BA52C;
 }
 
 
@@ -71,13 +83,17 @@ a:hover {
   width: 50%;
 }
 
+.col-3-4 {
+  width: 75%;
+}
+
 .category-box h2 {
 margin-bottom: 0;
 }
 
 header {
   padding-top: 10px;
-  padding: 0 14%;
+  padding: 0 25% 0 14%;
 }
 
 .category-article-title {
@@ -123,8 +139,23 @@ header {
   color: orange;
 }
 
-.category-list-container, .article-box {
+.category-list-container, .user-views, .compose-article, .article-box, .results {
   padding: 0 5%;
+}
+
+.profile-picture-container {
+  border: 5px solid #F15802;
+  border-radius: 2em;
+  padding: 10px;
+  width: 300px;
+}
+
+.no-style-list {
+  list-style-type: none;
+}
+
+.spooky {
+  font-family: 'Creepster'
 }
 /*
 .grid:after {
