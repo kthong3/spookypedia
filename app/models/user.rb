@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   after_initialize :init
 
+  before_save :set_default_picture
+
   has_secure_password
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
@@ -15,6 +17,10 @@ class User < ApplicationRecord
     self.is_admin ||= false
     self.is_banned ||= false
     self.bio ||= "Apparently, this user prefers to keep an air of mystery about them"
+  end
+
+  def set_default_picture
+    self.profile_pic_url = Faker::Avatar.image(self.username, "300x300", "png", "set4", "bg1")
   end
 
   def published_articles
