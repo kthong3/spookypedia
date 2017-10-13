@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @articles = Article.where(category_id: @category.id)
+    @articles = @category.articles.published
     @featured = @articles.sample
   end
 

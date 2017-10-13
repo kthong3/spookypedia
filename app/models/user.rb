@@ -17,11 +17,11 @@ class User < ApplicationRecord
   end
 
   def published_articles
-    self.articles.select { |article| article.is_published == true }
+    self.articles.published
   end
 
   def unpublished_articles
-    self.articles.select { |article| article.is_published == false }
+    self.articles.unpublished
   end
 
   def is_admin?

@@ -14,7 +14,8 @@ class Article < ApplicationRecord
   before_update :log_revision
 
   def self.random_article
-    order("RANDOM()").first
+    # self.order("RANDOM()").first
+    self.published.sample
   end
 
   def editor
@@ -45,7 +46,15 @@ class Article < ApplicationRecord
 
 
   def self.flagged_articles
-    self.all.select { |article| article.is_flagged == true }
+    self.select { |article| article.is_flagged == true }
+  end
+
+  def self.published
+    self.select { |article| article.is_published == true }
+  end
+
+  def self.unpublished
+    self.select { |article| article.is_published == false }
   end
 
   def log_revision
