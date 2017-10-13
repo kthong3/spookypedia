@@ -46,12 +46,15 @@ class ArticlesController < ApplicationController
 
   def update
     @article = find_and_ensure_article(params[:id])
+
     if params[:commit] == "Flag"
       @article.update(is_flagged: true)
       render 'articles/show' and return
     end
 
     authenticate!
+
+    @article.editor = current_user
 
     if @article.update(post_params)
       redirect_to article_url(@article), notice: "Article successfully edited!"
@@ -65,7 +68,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+
+
   def destroy
+    @article = find_and_ensure_article(params[:id])
+    Article.destroy(@article.id)
+    redirect_to "/categories", alert: "Article deleted!!!"
   end
 
   def find_and_ensure_article(id)

@@ -3,11 +3,11 @@
 <h1>Edit your article!</h2>
 
 <% if @errors %>
-<ul class='errors'>
+  <ul class='errors'>
   <% @errors.each do |error| %>
   <li><%= error %></li>
   <% end %>
-</ul>
+  </ul>
 <% end %>
 
 <%= form_for @article do |article| %>
@@ -27,6 +27,17 @@
   <p>
     <%= article.submit value="Submit" %>
   </p>
+<% end %>
+
+<% if current_user.is_admin || authorized?(@article.author) %>
+
+  <%= form_for @article, method: :delete do |article| %>
+    <p>
+    <%= article.submit value="DELETE" %>
+    </p>
+  <% end %>
+
+
 <% end %>
 
 <% else %>
