@@ -16,7 +16,7 @@ class RevisionsController < ApplicationController
     @article = Article.find(params[:article_id])
     @article.editor = current_user
     @revision = Revision.find(params[:id])
-    if authorized?(@article.author)
+    if current_user.is_admin? || authorized?(@article.author)
       @article.rollback!(@revision)
     end
     redirect_to article_path(@article)
