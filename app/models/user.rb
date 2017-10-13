@@ -31,12 +31,12 @@ class User < ApplicationRecord
   def self.article_search(search)
     authors = self.where("username LIKE ?", "%#{search}%")
     return authors if authors.count == 0
-    return authors[0].articles if authors.count == 1
-    articles = authors[0].articles
+    articles = authors[0].articles.published
+    return articles if authors.count == 1
     index = 1
     while index < authors.count
-      next_articles = authors[index].articles
-      articles = articles.or(next_articles)
+      next_articles = authors[index].articles.published
+      articles += next_articles
       index += 1
     end
     articles

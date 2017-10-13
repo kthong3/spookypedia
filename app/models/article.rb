@@ -69,16 +69,16 @@ class Article < ApplicationRecord
   end
 
   def self.search(search)
-    article_search = self.where("title LIKE ? OR body LIKE ?", "%#{search}%", "%#{search}%")
+    article_search = self.where("title LIKE ? OR body LIKE ?", "%#{search}%", "%#{search}%").published
     category_articles = Category.article_search(search)
     if article_search.count > 0 && category_articles.count > 0
-      article_search = article_search.or(category_articles)
+      article_search += category_articles
     elsif article_search.empty?
       article_search = category_articles
     end
     user_articles = User.article_search(search)
     if article_search.count > 0 && user_articles.count > 0
-      article_search.or(user_articles) if user_articles.count > 0
+      article_search += user_articles
     elsif article_search.empty?
       article_search = user_articles
     end
