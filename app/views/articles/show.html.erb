@@ -4,7 +4,7 @@
 
 <h2><%= @article.title %></h2>
 
-<h3>Category: <%= @article.category.name %></h3>
+<h3>Category: <%= link_to @article.category.name, @article.category %></h3>
 
 <div class="article-info">
   <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
