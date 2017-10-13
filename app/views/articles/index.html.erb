@@ -1,0 +1,13 @@
+<div class="results">
+  <h2>You've caught <%= @articles.count %> results!</h2>
+  <% @articles.each do |article| %>
+  <div class="article">
+    <h3><%= link_to article.title, article_path(article.id) %></h3>
+    <ul>
+      <li>Category: <%= link_to article.category.name, category_path(article.category) %></li>
+      <li>Author: <%= link_to article.author.username, user_path(article.author) %></li>
+    </ul>
+    <p><%= article.body.html_safe %></p>
+  </div>
+  <% end %>
+</div>

@@ -18,14 +18,28 @@ class User < ApplicationRecord
   end
 
   def published_articles
-    self.articles.select { |article| article.is_published == true }
+    self.articles.published
   end
 
   def unpublished_articles
-    self.articles.select { |article| article.is_published == false }
+    self.articles.unpublished
   end
 
   def is_admin?
     self.is_admin == true
+  end
+
+  def self.article_search(search)
+    authors = self.where("username LIKE ?", "%#{search}%")
+    return authors if authors.count == 0
+    articles = authors[0].articles.published
+    return articles if authors.count == 1
+    index = 1
+    while index < authors.count
+      next_articles = authors[index].articles.published
+      articles += next_articles
+      index += 1
+    end
+    articles
   end
 end
