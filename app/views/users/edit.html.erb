@@ -1,5 +1,6 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
-
+<div class="page-container">
+<div class="user-views">
 <% if logged_in? && authorized?(@user) %>
   <%= form_for @user, html: {multipart: true} do |f|  %>
    <p>
@@ -11,3 +12,5 @@
    </p>
   <% end %>
 <% end %>
+</div>
+</div>
