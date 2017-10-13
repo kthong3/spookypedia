@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     comment.article_id = params[:article_id]
     comment.author_id = current_user.id
     if comment.save
-      redirect_to article_url(params[:article_id])
+      redirect_to article_url(params[:article_id]), alert: "Comment has been successfully added!"
     else
       if Article.find_by(id: params[:article_id]).nil? || Article.find_by(id: params[:article_id]).is_published == false
         render :file => "#{Rails.root}/public/404.html", :status => 404

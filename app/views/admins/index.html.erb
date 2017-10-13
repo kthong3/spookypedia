@@ -13,7 +13,24 @@
   <h3>Flagged Comments</h3>
   <ul>
   <% @comments.each do |comment| %>
-    <li><%= link_to comment.body, article_path(comment.article) %></li>
+    <li><%= link_to comment.body.html_safe, article_path(comment.article) %></li>
   <% end %>
   </ul>
+</div>
+
+<div class="current-admins">
+  <h3>Current Admins</h3>
+  <ul>
+  <% @admins.each do |admin| %>
+    <li><%= link_to admin.username, user_path(admin) %></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class="appoint-admin">
+  <h3>Appoint New Admin</h3>
+  <%= form_for @user, url: user_admins_path, method: :post do |user| %>
+    <%= user.select :id, options_for_select(@user_array) %>
+    <%= user.submit value="Appoint" %>
+  <% end %>
 </div>

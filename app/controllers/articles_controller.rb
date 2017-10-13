@@ -11,10 +11,10 @@ class ArticlesController < ApplicationController
 
   def new
     authenticate!
-    @default_category_id = params[:cat_id]
     category_array = []
     Category.all.each { |category| category_array << [category.name, category.id] }
     @category = category_array
+    @article = Article.new(category_id: params[:cat_id], title: "", body: "")
   end
 
   def create
@@ -32,6 +32,7 @@ class ArticlesController < ApplicationController
       category_array = []
       Category.all.each { |category| category_array << [category.name, category.id] }
       @category = category_array
+      @article = article
       render "articles/new"
     end
   end

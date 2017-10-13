@@ -12,16 +12,16 @@
 
 <%= form_for :article, url: articles_path do |article| %>
 
-  <%= article.select :category_id, options_for_select(@category, selected = @default_category_id) %>
+  <%= article.select :category_id, options_for_select(@category, selected = @article.category_id) %>
 
   <p>
     <%= article.label :title %></br>
-    <%= article.text_field :title %>
+    <%= article.text_field :title, :value => @article.title %>
   </p>
 
   <p>
     <%= article.label :body %></br>
-    <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
+    <%= article.cktext_area :body, :value => @article.body, ckeditor: { language: 'en' }%>
   </p>
 
   <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
