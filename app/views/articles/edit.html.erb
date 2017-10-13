@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<% if current_user %>
 
 <% if authorized?(@article.author) %>
 <h1>Edit your article!</h1>

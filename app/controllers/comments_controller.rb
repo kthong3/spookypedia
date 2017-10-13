@@ -15,12 +15,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
-
   def update
     comment = find_and_ensure_comment(params[:id])
     @article = comment.article
