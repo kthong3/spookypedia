@@ -39,6 +39,11 @@ class Article < ApplicationRecord
 
   private
 
+
+  def self.flagged_articles
+    self.all.select { |article| article.is_flagged == true }
+  end
+
   def log_revision
     self.changes.each do |revised_attribute, values|
       if revised_attribute == "body" || revised_attribute == "title"
