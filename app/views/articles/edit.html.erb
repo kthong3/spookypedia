@@ -1,58 +1,58 @@
 <div class="page-container">
   <div class="compose-article">
-<% if current_user %>
+    <% if current_user %>
 
-<% if authorized?(@article.author) %>
-<h1>Edit your article!</h1>
-<% else %>
-<h1>Edit the article!</h1>
-<% end %>
+    <% if authorized?(@article.author) %>
+    <h1>Edit your article!</h1>
+    <% else %>
+    <h1>Edit the article!</h1>
+    <% end %>
 
-<% if @errors %>
-  <ul class='errors'>
-  <% @errors.each do |error| %>
-  <li><%= error %></li>
-  <% end %>
-  </ul>
-<% end %>
+    <% if @errors %>
+    <ul class='errors'>
+      <% @errors.each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
 
-<%= form_for @article do |article| %>
+    <%= form_for @article do |article| %>
 
-  <%= article.select :category_id, options_for_select(@category, selected = @article.category_id) %>
+    <%= article.select :category_id, options_for_select(@category, selected = @article.category_id) %>
 
-  <p>
-    <%= article.label :title %></br>
-    <%= article.text_field :title %>
-  </p>
-
-  <p>
-    <%= article.label :body %></br>
-    <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
-  </p>
-
-  <% if authorized?(@article.author) && !(@article.is_published)%>
-    <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
-  <% end %>
-
-  <p>
-    <%= article.submit value="Submit" %>
-  </p>
-<% end %>
-
-<% if current_user.is_admin || authorized?(@article.author) %>
-
-  <%= form_for @article, method: :delete do |article| %>
     <p>
-    <%= article.submit value="DELETE" %>
+      <%= article.label :title %></br>
+      <%= article.text_field :title %>
     </p>
-  <% end %>
 
-<% end %>
+    <p>
+      <%= article.label :body %></br>
+      <%= article.cktext_area :body, ckeditor: { language: 'en' }%>
+    </p>
 
-<% else %>
+    <% if authorized?(@article.author) && !(@article.is_published)%>
+    <%= article.check_box :is_published, {}, true, false %><b> Publish this article!</b>
+    <% end %>
 
-<h1>Sorry, you do not have authorization to view this page!</h1>
+    <p>
+      <%= article.submit value="Submit" %>
+    </p>
+    <% end %>
 
-<% end %>
-</div>
+    <% if current_user.is_admin || authorized?(@article.author) %>
+
+    <%= form_for @article, method: :delete do |article| %>
+    <p>
+      <%= article.submit value="DELETE" %>
+    </p>
+    <% end %>
+
+    <% end %>
+
+    <% else %>
+
+    <h1>Sorry, you do not have authorization to view this page!</h1>
+
+    <% end %>
+  </div>
 </div>

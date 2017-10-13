@@ -143,8 +143,29 @@ header {
   color: orange;
 }
 
-.category-list-container, .user-views, .compose-article, .article-box, .results {
+.category-list-container, .user-views, .compose-article, .revision-list, .article-box, .results {
   padding: 0 5%;
+}
+
+table {
+  border: 5px solid black;
+}
+
+table td {
+  border: 2px solid black;
+  padding: 4px;
+}
+
+table td:last-of-type {
+  border: 0px;
+}
+
+.revision-table-headers {
+  border: 5px solid black;
+}
+
+.revision-table-key {
+  font-weight: bolder;
 }
 
 .profile-picture-container {
