@@ -12,4 +12,19 @@ class Category < ApplicationRecord
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+
+  def self.article_search(search)
+    cap_search = search.capitalize
+    categories = self.where("name LIKE ?", "%#{cap_search}%")
+    return categories if categories.count == 0
+    return categories[0].articles if categories.count == 1
+    articles = categories[0].articles
+    index = 1
+    while index < categories.count
+      next_articles = categories[index].articles
+      articles = articles.or(next_articles)
+      index += 1
+    end
+    articles
+  end
 end

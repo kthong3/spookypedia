@@ -20,6 +20,12 @@
       <% end %>
     </nav>
     <h1><%= link_to "Spookypedia!", root_path %></h1>
+    <div class="search-articles">
+      <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Articles!" %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    </div>
   </header>
   <body>
     <%= yield %>
