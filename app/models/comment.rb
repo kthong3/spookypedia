@@ -11,4 +11,8 @@ class Comment < ApplicationRecord
     self.is_flagged ||= false
   end
 
+  def self.flagged_comments
+    select { |comment| comment.is_flagged == true }
+  end
+
 end

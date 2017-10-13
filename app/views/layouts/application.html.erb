@@ -11,13 +11,21 @@
   <header>
     <!-- Halloween countdown here -->
     <nav>
-      <% if current_user %>
+      <% if current_user && current_user.is_admin? %>
+        <%= link_to current_user.username, user_path(current_user.id) %> | <%= link_to "Logout", {:controller=> "sessions", :action=> "destroy"}, :method => :delete %> | <%= link_to "Home", categories_path %> | <%= link_to "Admin", user_admins_path(current_user) %>
+      <% elsif current_user %>
         <%= link_to current_user.username, user_path(current_user.id) %> | <%= link_to "Logout", {:controller=> "sessions", :action=> "destroy"}, :method => :delete %> | <%= link_to "Home", categories_path %>
       <% else %>
         <%= link_to "Register", new_user_path %> | <%= link_to "Login", new_session_path %> | <%= link_to "Home", categories_path %>
       <% end %>
     </nav>
     <h1><%= link_to "Spookypedia!", root_path %></h1>
+    <div class="search-articles">
+      <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Articles!" %>
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    </div>
   </header>
   <body>
     <%= yield %>

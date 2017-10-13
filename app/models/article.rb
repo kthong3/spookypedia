@@ -14,7 +14,8 @@ class Article < ApplicationRecord
   before_update :log_revision
 
   def self.random_article
-    order("RANDOM()").first
+    # self.order("RANDOM()").first
+    self.published.sample
   end
 
   def editor
@@ -43,6 +44,19 @@ class Article < ApplicationRecord
 
   private
 
+
+  def self.flagged_articles
+    select { |article| article.is_flagged == true }
+  end
+
+  def self.published
+    select { |article| article.is_published == true }
+  end
+
+  def self.unpublished
+    select { |article| article.is_published == false }
+  end
+
   def log_revision
     self.changes.each do |revised_attribute, values|
       if revised_attribute == "body" || revised_attribute == "title"
@@ -52,6 +66,23 @@ class Article < ApplicationRecord
         Revision.create!(object_id: self.id, revised_attribute: revised_attribute, before_value: before_value, revised_value: revised_value, editor_id: editor_id)
       end
     end
+  end
+
+  def self.search(search)
+    article_search = self.where("title LIKE ? OR body LIKE ?", "%#{search}%", "%#{search}%").published
+    category_articles = Category.article_search(search)
+    if article_search.count > 0 && category_articles.count > 0
+      article_search += category_articles
+    elsif article_search.empty?
+      article_search = category_articles
+    end
+    user_articles = User.article_search(search)
+    if article_search.count > 0 && user_articles.count > 0
+      article_search += user_articles
+    elsif article_search.empty?
+      article_search = user_articles
+    end
+    article_search
   end
 
 end
