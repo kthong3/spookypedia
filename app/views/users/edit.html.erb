@@ -4,10 +4,10 @@
   <%= form_for @user, html: {multipart: true} do |f|  %>
    <p>
      <%= f.label :image %><br>
-     <%= f.cktext_area :profile_pic_url, ckeditor: { language: 'en' } %>
+     <%= f.file_field :image %>
    </p>
    <p>
-     <%= f.submit "Save Picture" %>
+     <%= f.submit %>
    </p>
   <% end %>
 <% end %>
