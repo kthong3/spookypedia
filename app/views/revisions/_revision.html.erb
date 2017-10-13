@@ -7,10 +7,12 @@
   <th class="revision-table-datetime"><%= revision.created_at.strftime('%D, %R(%Z)') %></td>
   <td class="revision-table-values"><%= revision.before_value.html_safe %></td>
   <td class="revision-table-values"><%= revision.revised_value.html_safe %></td>
- <td class="revision-table-button">
+  <% if authorized?(@article.author) %>
+  <td class="revision-table-button">
     <%= form_for revision, url: revise_path(revision.object, revision) do |f| %>
 
       <%= f.submit %>
     <% end %>
   </td>
+  <% end %>
 </tr>
