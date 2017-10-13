@@ -24,12 +24,23 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    authorize!(@user)
+
+    if @user.update(post_params)
+      redirect_to user_url(@user), notice: "User bio successfully edited!"
+    else
+      @errors = @article.errors.full_messages
+
+      render "users/show"
+    end
+
   end
 
   private
 
   def post_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :bio)
   end
 
   def find_and_ensure_user(id)

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   def init
     self.is_admin ||= false
     self.is_banned ||= false
+    self.bio ||= "Apparently, this user prefers to keep an air of mystery about them"
   end
 
   def published_articles

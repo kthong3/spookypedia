@@ -1,9 +1,32 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+
 <h1><%= @user.username %></h1>
 
 <p class="notice"><b><%= notice %></b></p>
 
 <p><img src="<%= @user.profile_pic_url %>"></p>
-<p>PLACEHOLDER FOR USER BIO</p>
+
+<% if logged_in? && authorized?(@user) %>
+
+  <%= form_for @user do |user| %>
+
+    <p>
+    <%= user.label :bio %></br>
+    <%= user.cktext_area :bio, ckeditor: { language: 'en' }%>
+    </p>
+
+    <p>
+    <%= user.submit value="Submit" %>
+  </p>
+
+  <% end %>
+
+<% else %>
+
+<p>Bio</p>
+<%= @user.bio.html_safe %>
+
+<% end %>
 
 <% if logged_in? && authorized?(@user) %>
   <%= link_to "Create a New Article!", new_article_path%>
