@@ -139,8 +139,15 @@ header {
   color: orange;
 }
 
-.category-list-container, .compose-article, .article-box, .results {
+.category-list-container, .user-views, .compose-article, .article-box, .results {
   padding: 0 5%;
+}
+
+.profile-picture-container {
+  border: 5px solid #F15802;
+  border-radius: 2em;
+  padding: 10px;
+  width: 300px;
 }
 
 .no-style-list {
