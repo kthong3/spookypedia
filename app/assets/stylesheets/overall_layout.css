@@ -77,16 +77,17 @@ header {
 
 .category-article-title {
   font-size: 1.25em;
-  padding-bottom: 10px;
+  /*padding-bottom: 10px;*/
   display: block;
 }
 
 .article-preview-container {
   display: block;
+  width: 80%;
 }
 
 .category-article-preview {
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
 }
 
 .category-article-title a {
