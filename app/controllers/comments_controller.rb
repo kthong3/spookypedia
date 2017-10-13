@@ -22,6 +22,25 @@ class CommentsController < ApplicationController
   end
 
   def update
+    comment = find_and_ensure_comment(params[:id])
+    if params[:commit] == "Flag"
+      comment.update(is_flagged: true)
+      @article = comment.article
+      render 'articles/show' and return
+    end
+
+    # authenticate!
+
+    # if @article.update(post_params)
+    #   redirect_to article_url(@article), notice: "Article successfully edited!"
+    # else
+    #   @errors = @article.errors.full_messages
+    #   @article = find_and_ensure_article(params[:id])
+    #   category_array = []
+    #   Category.all.each { |category| category_array << [category.name, category.id] }
+    #   @category = category_array
+    #   render "articles/edit"
+    # end
   end
 
   def destroy
@@ -31,5 +50,12 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+
+  def find_and_ensure_comment(id)
+    comment = Comment.find_by(id: id)
+    render :file => "#{Rails.root}/public/404.html", :status => 404 unless comment
+    comment
   end
 end
