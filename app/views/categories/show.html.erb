@@ -3,6 +3,8 @@
 <div class="grid page-container">
 	<div class="article-box col-1-3">
 
+		<p class="notice"><b><%= notice %></b></p>
+
 		<span><h3><%= @category.name %></h3></span>
 		<% if logged_in? %>
 		  <%= link_to "Create a New Article!", new_article_path(:cat_id => @category.id) %>
