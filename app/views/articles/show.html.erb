@@ -1,69 +1,70 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
 <div class="page-container">
-<p class="notice"><b><%= notice %></b></p>
-<div class="article-box col-3-4">
-<h2><%= @article.title %></h2>
+  <div class="article-box col-3-4">
+    <p class="notice"><b><%= notice %></b></p>
+    <h2><%= @article.title %></h2>
 
-<h3>Category: <%= link_to @article.category.name, @article.category %></h3>
+    <h3>Category: <%= link_to @article.category.name, @article.category %></h3>
 
-<div class="article-info">
-  <p>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</p>
-  <p><%= @article.body.html_safe %></p>
-  <% if logged_in? %>
-    <%= link_to "Edit Article!", edit_article_path(@article)%>
-  <% end %>
+    <div class="article-info">
+      <p>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</p>
+      <p><%= @article.body.html_safe %></p>
+      <% if logged_in? %>
+      <p><%= link_to "Edit Article!", edit_article_path(@article)%></p>
+      <% end %>
 
-  <% if logged_in? && (@article.author || current_user.is_admin) %>
-    <%= link_to "See revision history", article_revisions_path(@article) %>
-  <% end %>
-  <% if @article.is_flagged == false %>
-    <%= form_for @article do |article| %>
+      <% #if logged_in? && (@article.author || current_user.is_admin) %>
+      <%= link_to "See revision history", article_revisions_path(@article) %>
+      <% #end %>
+      <% if @article.is_flagged == false %>
+      <%= form_for @article do |article| %>
       <%= article.submit value="Flag" %>
-    <% end %>
-  <% elsif logged_in? && (@article.is_flagged == true && current_user.is_admin?)  %>
-    <%= form_for @article do |article| %>
+      <% end %>
+      <% elsif logged_in? && (@article.is_flagged == true && current_user.is_admin?)  %>
+      <%= form_for @article do |article| %>
       <%= article.submit value="Flagged" %>
-    <% end %>
-  <% else %>
-    <%= button_to 'Flagged', {}, :disabled => @article.is_flagged? %>
-  <% end %>
+      <% end %>
+      <% else %>
+      <%= button_to 'Flagged', {}, :disabled => @article.is_flagged? %>
+      <% end %>
 
 
-</div>
+    </div>
 
-<h2>Comments</h2>
-<div class="article-comments">
-  <% @article.comments.each do |comment| %>
-  <div class="comment">
-    <p><%= comment.body.html_safe %><br>
-    Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %>.</p>
-  </div>
-    <% if comment.is_flagged == false %>
-      <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
+    <h2>Comments</h2>
+    <div class="article-comments">
+      <% @article.comments.each do |comment| %>
+      <div class="comment">
+        <p><%= comment.body.html_safe %><br>
+          Written by <%= link_to comment.author.username, user_path(comment.author) %> on <%= comment.created_at %>.</p>
+        </div>
+        <% if comment.is_flagged == false %>
+        <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
         <%= comment.submit value="Flag" %>
-      <% end %>
-    <% elsif logged_in? && (comment.is_flagged == true && current_user.is_admin?) %>
-      <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
+        <% end %>
+        <% elsif logged_in? && (comment.is_flagged == true && current_user.is_admin?) %>
+        <%= form_for comment, as: :comment, url: article_comment_path(@article, comment), method: :patch do |comment| %>
         <%= comment.submit value="Flagged" %>
-      <% end %>
-    <% else %>
-      <%= button_to 'Flagged', {}, :disabled => comment.is_flagged? %>
-    <% end %>
-  <% end %>
-</div><br>
+        <% end %>
+        <% else %>
+        <%= button_to 'Flagged', {}, :disabled => comment.is_flagged? %>
+        <% end %>
+        <% end %>
+      </div><br>
 
-<p class="alert"><%= alert %></p>
+      <p class="alert"><%= alert %></p>
 
-<div class="submit-comment">
-<% if current_user %>
-  <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
-      <p>Write a new comment!</p>
-      <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
-      <%= comment.submit value="Comment!" %>
-  <% end %>
-<% else %>
-<p>Don't be a stranger! Register or login to leave a comment!</p>
-<% end %>
-</div>
-</div>
-</div>
+      <div class="submit-comment">
+        <% if current_user %>
+        <%= form_for :comment, url: article_comments_path(@article), html: {id: "new_comment"} do |comment| %>
+        <p>Write a new comment!</p>
+        <%= comment.cktext_area :body, ckeditor: { language: 'en' }%>
+        <%= comment.submit value="Comment!" %>
+        <% end %>
+        <% else %>
+        <p>Don't be a stranger! Register or login to leave a comment!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+

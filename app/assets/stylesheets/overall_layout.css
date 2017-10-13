@@ -24,6 +24,10 @@ h1 a {
   text-decoration: none;
 }
 
+h1 a:visited {
+  color: #F15802;
+}
+
 nav a:hover {
   color: orange;
 }
@@ -139,8 +143,29 @@ header {
   color: orange;
 }
 
-.category-list-container, .user-views, .compose-article, .article-box, .results {
+.category-list-container, .user-views, .compose-article, .revision-list, .article-box, .results {
   padding: 0 5%;
+}
+
+table {
+  border: 5px solid black;
+}
+
+table td {
+  border: 2px solid black;
+  padding: 4px;
+}
+
+table td:last-of-type {
+  border: 0px;
+}
+
+.revision-table-headers {
+  border: 5px solid black;
+}
+
+.revision-table-key {
+  font-weight: bolder;
 }
 
 .profile-picture-container {
@@ -148,6 +173,16 @@ header {
   border-radius: 2em;
   padding: 10px;
   width: 300px;
+}
+
+.article-info img {
+  max-height: 500px;
+  max-width: 500px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .no-style-list {

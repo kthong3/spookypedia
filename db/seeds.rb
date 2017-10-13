@@ -24,12 +24,9 @@ end
 Category.create!(name: 'General')
 Category.create!(name: 'How-To')
 Category.create!(name: 'Costume Inspiration')
-Category.create!(name: 'Spooky Stories')
+Category.create!(name: 'Halloween Pets')
 Category.create!(name: 'Costume Help!')
-Category.create!(name: 'Favorite Halloween Candy')
-Category.create!(name: 'Scary Events')
-Category.create!(name: 'Cute Pets')
-Category.create!(name: 'Kreepy Kids')
+
 
 authors = User.pluck(:id)
 categories = Category.pluck(:id)
