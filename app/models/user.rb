@@ -29,6 +29,14 @@ class User < ApplicationRecord
     self.is_admin == true
   end
 
+  def self.admins
+    self.select { |user| user.is_admin? }
+  end
+
+  def self.not_admins
+    self.select { |user| !user.is_admin? }
+  end
+
   def self.article_search(search)
     authors = self.where("username LIKE ?", "%#{search}%")
     return authors if authors.count == 0
