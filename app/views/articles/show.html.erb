@@ -1,13 +1,13 @@
 <%= javascript_include_tag Ckeditor.cdn_url %>
-
+<div class="page-container">
 <p class="notice"><b><%= notice %></b></p>
-
+<div class="article-box col-3-4">
 <h2><%= @article.title %></h2>
 
 <h3>Category: <%= @article.category.name %></h3>
 
 <div class="article-info">
-  <span>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</span><br>
+  <p>Written by <%= link_to @article.author.username, user_path(@article.author) %> on <%= @article.created_at %>.</p>
   <p><%= @article.body.html_safe %></p>
   <% if logged_in? %>
     <%= link_to "Edit Article!", edit_article_path(@article)%>
@@ -63,3 +63,5 @@
 <% else %>
 <p>Don't be a stranger! Register or login to leave a comment!</p>
 <% end %>
+</div>
+</div>

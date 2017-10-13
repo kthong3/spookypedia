@@ -71,6 +71,10 @@ a:hover {
   width: 50%;
 }
 
+.col-3-4 {
+  width: 75%;
+}
+
 .category-box h2 {
 margin-bottom: 0;
 }
@@ -123,7 +127,7 @@ header {
   color: orange;
 }
 
-.category-list-container, .article-box {
+.category-list-container, .article-box, .results {
   padding: 0 5%;
 }
 /*
