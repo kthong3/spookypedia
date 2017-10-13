@@ -11,9 +11,6 @@ class RevisionsController < ApplicationController
     # end
   end
 
-  def create
-  end
-
   def revise
     authenticate!
     @article = Article.find(params[:article_id])

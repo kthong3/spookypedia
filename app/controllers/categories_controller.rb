@@ -16,12 +16,6 @@ class CategoriesController < ApplicationController
     @featured = @articles.sample
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
   end
 end
